@@ -1,0 +1,35 @@
+.sect-logo {
+  width: 10%;
+}
+
+.past-events-top {
+  padding: 2% 5% 0.4% 5%;
+}
+
+.sect-div {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.sect-p {
+  color: #383535;
+}
+
+.sect-heading {
+  color: #4b0082;
+}
+
+.past-event {
+  text-align: center;
+  padding: 0 15%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.past-event-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}

@@ -1,0 +1,82 @@
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.intro {
+  position: relative;
+}
+
+.bg-slide {
+  width: 100%;
+  z-index: 1;
+  height: 85vh;
+  padding: 0;
+  font-weight: 500;
+}
+
+.overlay {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+}
+
+.overlay h1 {
+  width: 100%;
+  margin: 0;
+  text-align: center;
+}
+
+.arrow {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  border-radius: 50%;
+  color: white;
+  position: absolute;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.arrow svg {
+  transition: color 300ms;
+}
+
+.arrow:hover {
+  color: pink;
+}
+
+.next {
+  right: 0%;
+  top: 50%;
+  z-index: 1;
+}
+
+.prev {
+  left: 0%;
+  top: 50%;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .bg-slide {
+    height: 300px;
+    object-fit: cover;
+  }
+}

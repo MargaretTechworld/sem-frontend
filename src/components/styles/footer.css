@@ -1,0 +1,56 @@
+.home-contact-section {
+  background-color: #510885;
+  color: rgb(242, 239, 239);
+  margin-top: 4%;
+}
+
+.home-contact-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 2% 10%;
+  gap: 15%;
+}
+
+.home-contact-heading {
+  font-size: 15px;
+}
+
+.home-contact-info p {
+  margin-bottom: 20px;
+  font-size: 13px;
+}
+
+.contact-map {
+  width: 45%;
+}
+
+.contact-map iframe {
+  width: 100%;
+  height: 200px;
+  border: none;
+}
+
+.footer-bottom {
+  width: 100%;
+  padding: 10px;
+  background-color: #fff;
+  color: #150024;
+}
+
+.footer-bottom p {
+  text-align: center;
+}
+
+.dash {
+  width: 30px;
+  margin-bottom: 20px;
+  height: 4px;
+  background-color: white;
+}
+
+.flip-icon {
+  display: inline-block;
+  transform: rotate(180deg);
+}

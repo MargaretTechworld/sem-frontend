@@ -1,0 +1,351 @@
+{
+  "portfolio": [
+    {
+      "id": "1",
+      "src": "./images/bg-1.jpg",
+      "description": "Welcome to our school"
+    },
+    {
+      "id": "2",
+      "src": "./images/bg4.jpg",
+      "description": "School"
+    },
+    {
+      "id": "3",
+      "src": "./images/bg5.jpg",
+      "title": "MealConnect",
+      "description": "school3"
+    },
+    {
+      "id": "4",
+      "src": "./images/bg6.jpg",
+      "title": "Active Companies",
+      "description": "school"
+    }
+  ],
+  "Testimonies": [
+    {
+      "id": "1",
+      "image":"./images/testifier/mag.jpg",
+      "alt": "mag",
+      "name": "Glenna Wilson",
+      "rating": 4,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu risus at turpis vehicula dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu risus at turpis vehicula dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu risus at turpis vehicula dignissim."
+    },
+    {
+      "id": "2",
+      "image":"./images/testifier/mag.jpg",
+      "alt": "mag",
+      "name": "Ajua Kojo-Musa",
+      "rating": 6,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu risus at turpis vehicula dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu risus at turpis vehicula dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu risus at turpis vehicula dignissim."
+    },
+    {
+      "id": "3",
+      "image":"./images/testifier/mag.jpg",
+      "alt": "mag",
+      "name": "Jonathan Mundah",
+      "rating": 7,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu risus at turpis vehicula dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu risus at turpis vehicula dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu risus at turpis vehicula dignissim."
+    },
+    {
+      "id": "4",
+      "image":"./images/testifier/mag.jpg",
+      "alt": "mag",
+      "name": "Margaret Kojo-Musa",
+      "rating": 4,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu risus at turpis vehicula dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu risus at turpis vehicula dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu risus at turpis vehicula dignissim."
+    }
+  ],
+
+  "Events": [
+    {
+      "id": "1",
+      "month": "January",
+      "events": [
+        {
+          "date": "14th January 2024",
+          "event-name": "Thanksgiving",
+          "time": "8:30pm",
+          "location": "school"
+        },
+        {
+          "date": "12th January 2024",
+          "event-name": "Picnic",
+          "time": "8:30pm",
+          "location": "school"
+        },
+        {
+          "date": "25th January 2024",
+          "event-name": "Sport",
+          "time": "8:30pm",
+          "location": "school"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "month": "February",
+      "events": [
+        {
+          "date": "24th February 2024",
+          "event-name": "Parent Meeting",
+          "time": "4:30pm",
+          "location": "school"
+        },
+        {
+          "date": "12th February 2024",
+          "event-name": "Bring and Share",
+          "time": "9:30pm",
+          "location": "school"
+        },
+        {
+          "date": "25th February 2024",
+          "event-name": "Variety Show",
+          "time": "8:30pm",
+          "location": "school"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "month": "March",
+      "events": [
+        {
+          "date": "24th March 2024",
+          "event-name": "Parent Meeting",
+          "time": "4:30pm",
+          "location": "school"
+        },
+        {
+          "date": "12th March 2024",
+          "event-name": "Dedicating a Chil",
+          "time": "9:30pm",
+          "location": "school"
+        },
+        {
+          "date": "25th March 2024",
+          "event-name": "Variety Show",
+          "time": "8:30pm",
+          "location": "school"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "month": "April",
+      "events": [
+        {
+          "date": "10th April 2024",
+          "event-name": "Easter Celebration",
+          "time": "10:00am",
+          "location": "church"
+        },
+        {
+          "date": "22nd April 2024",
+          "event-name": "Field Trip",
+          "time": "9:00am",
+          "location": "park"
+        },
+        {
+          "date": "30th April 2024",
+          "event-name": "Talent Show",
+          "time": "7:00pm",
+          "location": "school"
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "month": "May",
+      "events": [
+        {
+          "date": "5th May 2024",
+          "event-name": "Cultural Festival",
+          "time": "6:00pm",
+          "location": "community center"
+        },
+        {
+          "date": "18th May 2024",
+          "event-name": "Science Fair",
+          "time": "9:00am",
+          "location": "school"
+        },
+        {
+          "date": "28th May 2024",
+          "event-name": "Sports Day",
+          "time": "1:00pm",
+          "location": "school field"
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "month": "June",
+      "events": [
+        {
+          "date": "8th June 2024",
+          "event-name": "Graduation Ceremony",
+          "time": "5:00pm",
+          "location": "auditorium"
+        },
+        {
+          "date": "16th June 2024",
+          "event-name": "Field Day",
+          "time": "9:00am",
+          "location": "school"
+        },
+        {
+          "date": "25th June 2024",
+          "event-name": "Summer Concert",
+          "time": "7:30pm",
+          "location": "school"
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "month": "July",
+      "events": [
+        {
+          "date": "4th July 2024",
+          "event-name": "Independence Day Celebration",
+          "time": "11:00am",
+          "location": "park"
+        },
+        {
+          "date": "15th July 2024",
+          "event-name": "Summer BBQ",
+          "time": "6:00pm",
+          "location": "backyard"
+        },
+        {
+          "date": "28th July 2024",
+          "event-name": "Movie Night",
+          "time": "8:30pm",
+          "location": "community center"
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "month": "August",
+      "events": [
+        {
+          "date": "10th August 2024",
+          "event-name": "Beach Party",
+          "time": "12:00pm",
+          "location": "beach"
+        },
+        {
+          "date": "20th August 2024",
+          "event-name": "Art Exhibition",
+          "time": "5:00pm",
+          "location": "gallery"
+        },
+        {
+          "date": "31st August 2024",
+          "event-name": "End of Summer Bash",
+          "time": "7:00pm",
+          "location": "park"
+        }
+      ]
+    },
+    {
+      "id": "9",
+      "month": "September",
+      "events": [
+        {
+          "date": "8th September 2024",
+          "event-name": "Labor Day Picnic",
+          "time": "11:30am",
+          "location": "park"
+        },
+        {
+          "date": "18th September 2024",
+          "event-name": "Book Club Meeting",
+          "time": "6:30pm",
+          "location": "library"
+        },
+        {
+          "date": "29th September 2024",
+          "event-name": "Charity Run",
+          "time": "8:00am",
+          "location": "downtown"
+        }
+      ]
+    },
+    {
+      "id": "10",
+      "month": "October",
+      "events": [
+        {
+          "date": "12th October 2024",
+          "event-name": "Harvest Festival",
+          "time": "10:00am",
+          "location": "farm"
+        },
+        {
+          "date": "23rd October 2024",
+          "event-name": "Cultural Party",
+          "time": "7:00pm",
+          "location": "community center"
+        },
+        {
+          "date": "31st October 2024",
+          "event-name": "Trick-or-Treating",
+          "time": "5:30pm",
+          "location": "neighborhood"
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "month": "November",
+      "events": [
+        {
+          "date": "11th November 2024",
+          "event-name": "Veterans Day Parade",
+          "time": "9:00am",
+          "location": "downtown"
+        },
+        {
+          "date": "20th November 2024",
+          "event-name": "Friendsgiving Dinner",
+          "time": "6:30pm",
+          "location": "friend's house"
+        },
+        {
+          "date": "28th November 2024",
+          "event-name": "Black Friday Sales",
+          "time": "All day",
+          "location": "malls"
+        }
+      ]
+    },
+    {
+      "id": "12",
+      "month": "December",
+      "events": [
+        {
+          "date": "5th December 2024",
+          "event-name": "Tree Lighting Ceremony",
+          "time": "6:00pm",
+          "location": "town square"
+        },
+        {
+          "date": "15th December 2024",
+          "event-name": "Winter Concert",
+          "time": "7:00pm",
+          "location": "school auditorium"
+        },
+        {
+          "date": "31st December 2024",
+          "event-name": "New Year's Eve Party",
+          "time": "9:00pm",
+          "location": "hotel ballroom"
+        }
+      ]
+    }
+  ]
+}
