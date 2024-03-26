@@ -4,3 +4,19 @@
   box-sizing: border-box;
   font-family: Muli, Helvetica, Arial, sans-serif;
 }
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content-container {
+  flex: 1;
+}
