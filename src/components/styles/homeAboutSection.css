@@ -1,0 +1,56 @@
+.home-about {
+  padding: 5% 5% 5% 5%;
+}
+
+.home-about-heading {
+  margin-bottom: 2%;
+  font-weight: 500;
+  color: #4b0082;
+  font-size: 2rem;
+}
+
+.learn-div {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+}
+
+.learn-more {
+  font-size: 15px;
+  font-weight: 500;
+  color: rgb(240 201 5);
+}
+
+.home-about-paragraph {
+  font-family: muli, helvetica, arial, sans-serif;
+  line-height: 21px;
+  font-weight: 300;
+  font-size: 15px;
+  color: rgb(51, 51, 51);
+}
+
+.home-about-sub-heading {
+  margin-bottom: 2%;
+  font-weight: 500;
+  color: #4b0082;
+  font-size: 1.5rem;
+}
+
+.home-img {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  .home-about-info {
+    display: flex;
+    gap: 30px;
+  }
+
+  .home-about {
+    padding: 5% 10% 5% 10%;
+  }
+}

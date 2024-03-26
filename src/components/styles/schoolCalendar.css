@@ -1,0 +1,147 @@
+.news-section {
+  width: 100%;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.news-section-heading {
+  font-size: 24px;
+  color: #292727;
+  margin-bottom: 20px;
+}
+
+.event-drop {
+  display: flex;
+  justify-content: space-between;
+  background-color: #c0c0c0;
+  border-bottom: 1px solid #4b0082;
+  color: #4b0082;
+  padding: 4%;
+  transition: background-color 0.3ms;
+}
+
+.event-drop:hover {
+  cursor: pointer;
+  background-color: #958f8f;
+}
+
+.events-cont {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+  padding: 0.7%;
+  flex-direction: column;
+}
+
+.event-first {
+  display: flex;
+  gap: 3px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.event-second {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  flex-direction: row-reverse;
+}
+
+.event-time {
+  font-size: 15px;
+}
+
+.event-name {
+  font-weight: 700;
+  font-size: 18px;
+  text-align: left;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.event-attend {
+  background-color: #bbb;
+  font-size: 12px;
+  padding: 3px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.event-more {
+  background-color: #c0c0c0;
+  padding: 4px;
+  border: 0.5px solid black;
+  transition: background-color 0.5s ease;
+  font-size: 12px;
+}
+
+.event-more:hover {
+  background-color: #4b0082;
+  color: #fff;
+  cursor: pointer;
+}
+
+.download-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #652793;
+  padding: 12px 24px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.download-link:hover {
+  background-color: #280434;
+}
+
+.download-icon {
+  margin-left: 8px;
+}
+
+.download-link span {
+  margin-right: 8px;
+}
+
+@media (min-width: 768px) {
+  .event-drop {
+    padding: 0.7%;
+  }
+
+  .event-first {
+    gap: 40px;
+  }
+
+  .event-second {
+    flex-direction: row;
+    gap: 20px;
+    justify-content: space-between;
+  }
+
+  .event-time {
+    font-size: 12px;
+  }
+
+  .events-cont {
+    flex-direction: row;
+  }
+
+  .event-name {
+    font-size: 20px;
+  }
+
+  .news-section {
+    padding: 10px 90px;
+  }
+}

@@ -1,0 +1,173 @@
+.middle-div {
+  display: none;
+}
+
+.middle-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.middle-list li {
+  border-bottom: 1px solid white;
+}
+
+.mobile-menu {
+  position: sticky;
+  padding: 1% 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menu-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-sec {
+  width: 90px;
+  object-fit: cover;
+}
+
+.destined-name {
+  display: none;
+}
+
+.destined-name p {
+  font-weight: 900;
+  font-size: 15px;
+  color: #4b0082;
+}
+
+.logo-name {
+  display: flex;
+  flex-basis: 30%;
+  gap: 10px;
+}
+
+.menu {
+  position: relative;
+  width: 2.25rem;
+  height: 2rem;
+  cursor: pointer;
+}
+
+.menu span {
+  position: absolute;
+  height: 0.2rem;
+  width: 100%;
+  background-color: #4b0082;
+  border-radius: 0.2rem;
+  transition: transform 0.3s ease-in-out;
+}
+
+.menu span:nth-child(2) {
+  top: 0.8rem;
+}
+
+.open {
+  display: flex;
+  background-color: #4b0082;
+  padding-top: 10%;
+  color: white;
+  list-style: none;
+  padding-bottom: 10%;
+}
+
+.open-menu {
+  display: flex;
+}
+
+.menu span:nth-child(3) {
+  top: 1.6rem;
+}
+
+.menu.open-menu span:nth-child(1) {
+  transform: rotate(45deg);
+  top: 0.8rem;
+}
+
+.menu.open-menu span:nth-child(2) {
+  transform: rotate(-45deg);
+  top: 0.8rem;
+}
+
+.menu.open-menu span:nth-child(3) {
+  transform: scaleX(0);
+}
+
+.close {
+  display: none;
+}
+
+.list {
+  font-weight: 600;
+  color: white;
+  text-decoration: none;
+  padding: 12%;
+  font-size: 24px;
+}
+
+.active {
+  color: #fd18ff;
+  border-radius: 20px;
+}
+
+@media (min-width: 768px) {
+  .menu {
+    display: none;
+  }
+
+  .middle-div {
+    display: flex;
+  }
+
+  .middle-list {
+    flex-direction: row;
+    align-items: center;
+    width: auto;
+  }
+
+  .destined-name {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo-name {
+    flex-basis: auto;
+    align-items: center;
+  }
+
+  .destined-name p {
+    font-size: 18px;
+  }
+
+  .menu-section {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.4%;
+  }
+
+  .list {
+    color: #4b0082;
+    padding: 0;
+    font-size: 0.99rem;
+  }
+
+  .mobile-menu {
+    padding: 0;
+  }
+
+  .middle-list li {
+    border: none;
+  }
+
+  .why-us div {
+    padding: 5% 15% 5% 15%;
+  }
+}
