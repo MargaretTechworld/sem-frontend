@@ -4,6 +4,12 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background-color: #3e096a;
+}
+
+.login-container h2 {
+  color: white;
+  margin-bottom: 10px;
 }
 
 form {
@@ -24,6 +30,7 @@ form input {
   display: flex;
   align-items: center;
   border: 1px solid #767676;
+  background-color: white;
   padding: 2%;
 }
 
@@ -49,11 +56,15 @@ form input:focus {
 }
 
 .submit-button:hover {
-  background-color: #472068;
+  background-color: #9738e4;
   cursor: pointer;
 }
 
 button {
   border: none;
   background: none;
+}
+
+button:hover {
+  cursor: pointer;
 }
