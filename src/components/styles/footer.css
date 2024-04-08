@@ -1,7 +1,6 @@
 .home-contact-section {
   background-color: #510885;
   color: rgb(242, 239, 239);
-  margin-top: 4%;
 }
 
 .home-contact-container {
@@ -38,7 +37,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  text-align: center;
 }
 
 .footer-bottom {

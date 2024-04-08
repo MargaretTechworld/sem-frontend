@@ -3,6 +3,7 @@
   margin: 0 auto;
   padding: 40px;
   border-radius: 4px;
+  background-color: #bfb0ca;
 }
 
 .contact-page h1 {
@@ -57,7 +58,7 @@
 }
 
 .contact-form button {
-  background-color: #4caf50;
+  background-color: #8251a5;
   color: white;
   padding: 12px 20px;
   border: none;
@@ -67,11 +68,11 @@
 }
 
 .contact-form button:hover {
-  background-color: #45a049;
+  background-color: #4d2769;
 }
 
 .contact-form button:active {
-  background-color: #3e8e41;
+  background-color: #1e092e;
 }
 
 @media (max-width: 768px) {

@@ -7,7 +7,7 @@ import Image3 from '../../images/bg7.jpg';
 import Image4 from '../../images/bg3.jpg';
 
 const PastEvents = () => (
-  <section>
+  <section className="past-event-div">
     <div data-aos="fade" className="past-events-top">
       <div data-aos="fade" className="sect-div">
         <img data-aos="fade" className="sect-logo" src={logo} alt="logo" />

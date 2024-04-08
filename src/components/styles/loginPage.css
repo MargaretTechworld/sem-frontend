@@ -1,11 +1,13 @@
 .login-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #3e096a;
-}
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(rgba(62, 9, 106, 0.9), rgba(62, 9, 106, 0.9)), url("../../images/school-back.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 
 .login-container h2 {
   color: white;
