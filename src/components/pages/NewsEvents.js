@@ -12,11 +12,11 @@ const NewsEvents = () => {
   };
 
   return (
-    <div className="news-event-section">
+    <div data-aos="fade" className="news-event-section">
       <Intro heading="NEWS & EVENTS" paragraph="" />
       {data?.News?.map((item) => (
         <>
-          <div key={item.id} className="news-event-content">
+          <div data-aos="fade-out" key={item.id} className="news-event-content">
             <div className="news-event-sub-content">
               <h2 className="news-event-heading">{item['news-heading']}</h2>
               <div className="news-event-date-type">

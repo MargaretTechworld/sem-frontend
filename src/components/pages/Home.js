@@ -1,6 +1,6 @@
 import React from 'react';
 import HomeAboutSection from './HomeAboutSection';
-import WhUs from './Testimonials';
+import Testimonials from './Testimonials';
 import NewsLetter from './SchoolCalendar';
 import Welcome from './Welcome';
 import '../styles/home.css';
@@ -14,7 +14,7 @@ const Home = () => (
       <NewsScroll />
     </div>
     <HomeAboutSection />
-    <WhUs />
+    <Testimonials />
     <NewsLetter />
     <PastEvents />
   </div>

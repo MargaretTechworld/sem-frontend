@@ -4,7 +4,7 @@ import '../styles/welcome.css';
 
 const Welcome = () => (
   <div className="welcome-container">
-    <div className="welcome-video">
+    <div data-aos="fade-left" className="welcome-video">
       <iframe
         className="video-frame"
         width="560"
@@ -16,8 +16,8 @@ const Welcome = () => (
         referrerPolicy="strict-origin-when-cross-origin"
       />
     </div>
-    <div className="welcome-text">
-      <h2 className="welcome-heading">
+    <div data-aos="slide-down" className="welcome-text">
+      <h2 data-aos="slide-down" className="welcome-heading">
         WELCOME
         <br />
         TO DESTINED FOR GRATENESS DAYCARE AND PRIMARY SCHOOL

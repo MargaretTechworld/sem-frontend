@@ -4,11 +4,11 @@ import Intro from './Intro';
 import '../styles/contactUs.css';
 
 const ContactUs = () => (
-  <div>
+  <div data-aos="fade-out">
     <Intro heading="About Us" paragraph="We are the chosen generation" />
     <div className="contact-page">
       <div className="contact-info">
-        <div className="contact-info-div">
+        <div data-aos="slide-left" className="contact-info-div">
           <h1>Contact us</h1>
           <p className="contact-p">We would be thrilled to hear from you! Don&apos;t hesitate to reach out to us and discover the amazing opportunities our school has to offer. </p>
           <p className="contact-p">

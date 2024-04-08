@@ -86,7 +86,7 @@ const Navigation = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink className="login" to="/resources" aria-label="Contact Us">
+              <NavLink className="login" to="/login-page" aria-label="Login">
                 Login
               </NavLink>
             </li>

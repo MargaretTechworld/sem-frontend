@@ -9,8 +9,8 @@ const Admission = () => {
     { to: '#Get Applicaation Form', label: 'Get Applicaation Form', id: 'Get Applicaation Form' },
     {
       to: '#Get Applicaation Guide',
-      label: 'Get Applicaation Guide',
-      id: 'Get Applicaation Guide',
+      label: 'Get Application Guide',
+      id: 'Get Application Guide',
     },
   ];
   return (

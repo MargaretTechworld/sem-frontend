@@ -25,8 +25,8 @@ const About = () => {
         <AboutNav
           links={links}
         />
-        <div className="side-menu-content">
-          <div className="about-us-third-div">
+        <div data-aos="fade" className="side-menu-content">
+          <div data-aos="slide-left" className="about-us-third-div">
             <img className="mission-img" src={mission} alt="img2" />
             <div>
               <h2 id="Mission Statement">Mission Statement</h2>
@@ -62,7 +62,7 @@ const About = () => {
             </div>
             <img className="mission-img" src={whyUs} alt="img2" />
           </div>
-          <div className="about-us-third-div">
+          <div data-aos="slide-left" className="about-us-third-div">
             <img className="mission-img" src={goals} alt="img2" />
             <div id="Our Goals">
               <h2>Our Goals</h2>

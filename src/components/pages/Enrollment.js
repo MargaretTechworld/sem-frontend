@@ -3,7 +3,7 @@ import '../styles/enrollment.css';
 import { FaDownload } from 'react-icons/fa';
 
 const Enrollment = () => (
-  <div className="enrollment-div">
+  <div data-aos="fade" className="enrollment-div">
     <div className="enrollment-news flex-item">
       <h2 className="enrollment-news-heading">Destined for grateness School Registration 2024</h2>
       <h3 className="enrollment-news-sub-heading">
@@ -46,7 +46,7 @@ const Enrollment = () => (
             </p>
           </div>
         </div>
-        <div className="enrollment-procedure-info">
+        <div data-aos="fade-up" className="enrollment-procedure-info">
           <p className="enrollment-procedure-info-number">2.</p>
           <div className="enrollment-procedure-info-sub-div">
             <h4 className="enrollment-procedure-info-sub-heading">LETTER OF REQUEST</h4>
@@ -56,7 +56,7 @@ const Enrollment = () => (
             </p>
           </div>
         </div>
-        <div className="enrollment-procedure-info">
+        <div data-aos="fade-up" className="enrollment-procedure-info">
           <p className="enrollment-procedure-info-number">3.</p>
           <div className="enrollment-procedure-info-sub-div">
             <h4 className="enrollment-procedure-info-sub-heading">LETTER OF REQUEST</h4>
@@ -66,7 +66,7 @@ const Enrollment = () => (
             </p>
           </div>
         </div>
-        <div className="enrollment-procedure-info">
+        <div data-aos="fade-up" className="enrollment-procedure-info">
           <p className="enrollment-procedure-info-number">4.</p>
           <div className="enrollment-procedure-info-sub-div">
             <h4 className="enrollment-procedure-info-sub-heading">LETTER OF REQUEST</h4>

@@ -54,9 +54,9 @@ const Testimonials = () => {
   };
 
   return (
-    <div className="whyUs">
-      <div>
-        <h1>Testimonials</h1>
+    <div data-aos="fade" className="whyUs">
+      <div data-aos="fade">
+        <h1 data-aos="fade">Testimonials</h1>
         <Slider
           infinite={settings.infinite}
           lazyLoad={settings.lazyLoad}
@@ -70,15 +70,15 @@ const Testimonials = () => {
           autoplaySpeed={settings.autoplaySpeed}
         >
           {data?.Testimonies?.map((item) => (
-            <div key={item.id}>
-              <img className="testifier-img" src={item.image} alt={item.alt} />
-              <h2>{item.name}</h2>
-              <div className="stars">
+            <div data-aos="fade" key={item.id}>
+              <img data-aos="fade" className="testifier-img" src={item.image} alt={item.alt} />
+              <h2 data-aos="fade">{item.name}</h2>
+              <div data-aos="fade" className="stars">
                 {Array.from({ length: item.rating }, (_, index) => (
                   <FaStar key={index} style={{ color: 'yellow' }} />
                 ))}
               </div>
-              <p>{item.description}</p>
+              <p data-aos="fade">{item.description}</p>
             </div>
           ))}
         </Slider>

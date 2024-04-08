@@ -389,5 +389,27 @@
       "news-image": "./images/bg5.jpg",
       "type": "News"
     }
+  ],
+  "pastPics":[
+    {
+      "id": 1,
+      "pastImage":"./images/bg-1.jpg",
+      "pastTitle": "1st Thanksgiving Service"
+    },
+    {
+      "id": 2,
+      "pastImage":"./images/bg2.jpg",
+      "pastTitle": "Picnic"
+    },
+    {
+      "id": 3,
+      "pastImage":"./images/bg7.jpg",
+      "pastTitle": "Carol Service"
+    },
+    {
+      "id": 4,
+      "pastImage":"./images/bg3.jpg",
+      "pastTitle": "Sport"
+    }
   ]
 }

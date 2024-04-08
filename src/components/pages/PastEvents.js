@@ -8,10 +8,10 @@ import Image4 from '../../images/bg3.jpg';
 
 const PastEvents = () => (
   <section>
-    <div className="past-events-top">
-      <div className="sect-div">
-        <img className="sect-logo" src={logo} alt="logo" />
-        <div>
+    <div data-aos="fade" className="past-events-top">
+      <div data-aos="fade" className="sect-div">
+        <img data-aos="fade" className="sect-logo" src={logo} alt="logo" />
+        <div data-aos="fade">
           <h2 className="sect-heading">Destined For Greatness</h2>
           <p className="sect-p">
             At Destined for Greatness School, we believe in the power of a
@@ -22,21 +22,21 @@ const PastEvents = () => (
         </div>
       </div>
     </div>
-    <div className="past-event">
+    <div data-aos="fade" className="past-event">
       <div>
-        <img className="past-event-img" src={Image2} alt="1st Thanksgiving Service" />
+        <img data-aos="fade-right" className="past-event-img" src={Image2} alt="1st Thanksgiving Service" />
         <p>1st Thanksgiving Service</p>
       </div>
       <div>
-        <img className="past-event-img" src={Image1} alt="picnic" />
+        <img data-aos="zoom-out" className="past-event-img" src={Image1} alt="picnic" />
         <p>Picnic</p>
       </div>
       <div>
-        <img className="past-event-img" src={Image4} alt="carol service" />
+        <img data-aos="fade-right" className="past-event-img" src={Image4} alt="carol service" />
         <p>Carol Service</p>
       </div>
       <div>
-        <img className="past-event-img" src={Image3} alt="carol service" />
+        <img data-aos="zoom-out" className="past-event-img" src={Image3} alt="carol service" />
         <p>Sport</p>
       </div>
     </div>
