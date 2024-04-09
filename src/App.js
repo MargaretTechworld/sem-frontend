@@ -11,6 +11,7 @@ import Admission from './components/pages/Admission';
 import NewsEvents from './components/pages/NewsEvents';
 import Navigation from './components/pages/Navigation';
 import Footer from './components/pages/Footer';
+import Dashboard from './components/pages/Dashboard';
 
 function App() {
   useEffect(() => {
@@ -21,6 +22,7 @@ function App() {
     <div className="app-container">
       <Routes>
         <Route path="/login-page" element={<LoginPage />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route
           path="/*"
           element={(

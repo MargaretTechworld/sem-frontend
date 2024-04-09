@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 import '../styles/loginPage.css';
 
@@ -6,6 +7,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -23,6 +25,7 @@ const LoginPage = () => {
     e.preventDefault();
     setEmail('');
     setPassword('');
+    navigate('/dashboard');
   };
 
   return (

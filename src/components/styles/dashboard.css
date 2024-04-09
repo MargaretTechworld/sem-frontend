@@ -1,0 +1,58 @@
+.dashboard {
+  display: flex;
+}
+
+.dashboard-side {
+  padding: 1% 2%;
+  width: 25%;
+  height: 100vh;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.school-name {
+  color: rgb(92, 21, 139);
+  margin-bottom: 10px;
+}
+
+.admin-pic {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: blueviolet;
+  border-radius: 100%;
+}
+
+.dashboard-top-div {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+  align-items: center;
+  width: 100%;
+  padding: 1% 2%;
+}
+
+.dashboard-content {
+  width: 100%;
+}
+
+.dashboard-second-div {
+  padding: 1% 5%;
+}
+
+.dashboard-links li {
+  list-style: none;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: black;
+}
+
+.dashboard-list {
+  text-decoration: none;
+  color: black;
+}
