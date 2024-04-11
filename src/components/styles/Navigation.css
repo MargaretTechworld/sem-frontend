@@ -11,7 +11,7 @@
 }
 
 .middle-list li {
-  border-bottom: 1px solid #4b0082;
+  border-bottom: 1px solid #fcfcfc;
 }
 
 .mobile-menu {
@@ -70,12 +70,12 @@
 
 .open {
   display: flex;
-
-  /* background-color: #4b0082; */
   padding-top: 10%;
   color: #4b0082;
   list-style: none;
   padding-bottom: 10%;
+  background: linear-gradient(rgba(62, 9, 106, 0.9), rgba(62, 9, 106, 0.9)), url("../../images/school-back.png");
+  height: 100vh;
 }
 
 .open-menu {
@@ -106,7 +106,7 @@
 
 .list {
   font-weight: 600;
-  color: #4b0082;
+  color: #fff;
   text-decoration: none;
   padding: 5%;
   font-size: 24px;
@@ -114,7 +114,7 @@
 
 .login {
   font-weight: 600;
-  color: #4b0082;
+  color: #fff;
   text-decoration: none;
   padding: 5%;
   font-size: 24px;

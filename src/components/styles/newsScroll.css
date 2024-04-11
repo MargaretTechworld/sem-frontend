@@ -60,3 +60,15 @@ li:last-child::after {
     transform: translateX(-1083px);
   }
 }
+
+@media (max-width: 768px) {
+  @keyframes scroll {
+    from {
+      transform: translateX(768px);
+    }
+
+    to {
+      transform: translateX(-1083px);
+    }
+  }
+}

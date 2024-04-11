@@ -7,7 +7,8 @@ const Enrollment = () => (
     <div className="enrollment-news flex-item">
       <h2 className="enrollment-news-heading">Destined for Greatness School Registration 2024</h2>
       <h3 className="enrollment-news-sub-heading">
-        Destined for Greatness School is now accepting registration for the September 2021 to
+        Destined for Greatness School is now accepting
+        registration for the September 2021 to
         June 2022 school year.
       </h3>
       <p className="enrollment-news-info">

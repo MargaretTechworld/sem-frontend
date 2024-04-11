@@ -10,6 +10,10 @@ const Navigation = () => {
     setMenuOpen(!menuOpen);
   };
 
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
       toggleMenu();
@@ -61,32 +65,32 @@ const Navigation = () => {
         <div className={`middle-div ${menuOpen ? 'open' : ''}`}>
           <ul className="middle-list">
             <li>
-              <NavLink className="list" to="/" aria-label="Home">
+              <NavLink className="list" to="/" aria-label="Home" onClick={closeMenu}>
                 Home
               </NavLink>
             </li>
             <li>
-              <NavLink className="list" to="/about" aria-label="About Us">
+              <NavLink className="list" to="/about" aria-label="About Us" onClick={closeMenu}>
                 About Us
               </NavLink>
             </li>
             <li>
-              <NavLink className="list" to="/admission" aria-label="Admission">
+              <NavLink className="list" to="/admission" aria-label="Admission" onClick={closeMenu}>
                 Admission
               </NavLink>
             </li>
             <li>
-              <NavLink className="list" to="/news-events" aria-label="News & Events">
+              <NavLink className="list" to="/news-events" aria-label="News & Events" onClick={closeMenu}>
                 News &amp; Events
               </NavLink>
             </li>
             <li>
-              <NavLink className="list" to="/contact-us" aria-label="Contact Us">
+              <NavLink className="list" to="/contact-us" aria-label="Contact Us" onClick={closeMenu}>
                 Contact Us
               </NavLink>
             </li>
             <li>
-              <NavLink className="login" to="/login-page" aria-label="Login">
+              <NavLink className="login" to="/login-page" aria-label="Login" onClick={closeMenu}>
                 Login
               </NavLink>
             </li>
