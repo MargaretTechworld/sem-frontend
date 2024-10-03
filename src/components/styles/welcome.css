@@ -4,10 +4,14 @@
   align-items: center;
   color: white;
   display: flex;
+  justify-content: center;
   flex-direction: column;
-  height: 80vh;
+  height: 100vh;
   gap: 20px;
-  background-color: #4b0082;
+  background-image: url('/src/images/admissionbg.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .welcome-heading {

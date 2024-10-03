@@ -1,0 +1,94 @@
+/* General styling for the container */
+.side-menu-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: #f4f4f4; /* Light background */
+}
+
+.about-us-third,
+.about-us-fourth {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 1.5rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-us-third:hover,
+.about-us-fourth:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Ensure image and text take equal space */
+.mission-img {
+  flex: 1; /* Equal portion */
+  width: 100%; /* Ensures the image scales properly */
+  border-radius: 8px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.mission-img:hover {
+  transform: scale(1.05);
+}
+
+/* Text content takes equal portion */
+.about-us-third div,
+.about-us-fourth div {
+  flex: 1; /* Equal portion */
+}
+
+h2 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.mission-paragraph {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #666;
+  margin: 0;
+}
+
+.checklist {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns */
+  gap: 20px; /* Space between items */
+}
+
+.check-item {
+  display: flex;
+  align-items: center; /* Center the icon and text */
+  background-color: #f9f9f9; /* Light background for checklist items */
+  padding: 1rem; /* Padding around the items */
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.check-icon {
+  margin-right: 0.5rem; /* Space between icon and text */
+  color: #4caf50; /* Green color for the check icon */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .about-us-third,
+  .about-us-fourth {
+    flex-direction: column;
+  }
+
+  .check-item {
+    width: 100%; /* Full width on smaller screens */
+  }
+
+  .mission-img {
+    width: 100%;
+  }
+}

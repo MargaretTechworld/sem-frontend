@@ -29,22 +29,21 @@ const Footer = () => (
           <p>
             <FaMapMarkerAlt />
             {' '}
-            123 Main Street
+            54/56 School Rd. Azuabie Town, Trans Amadi.
           </p>
           <p>
             <FaCity />
             {' '}
-            City, State, ZIP
+            Port Harcourt, Rivers State, ZIP
           </p>
           <p>
             <FaEnvelope />
             {' '}
-            info@example.com
+            virgitabinternationalschool@gmail.com
           </p>
           <p>
             <span className="flip-icon"><FaPhone /></span>
-            {' '}
-            (123) 456-7890
+            (+234) 816 735 0455 & (+234) 702 610 3326
           </p>
         </div>
       </div>
@@ -54,7 +53,7 @@ const Footer = () => (
         &copy;
         {new Date().getFullYear()}
         {' '}
-        Destined for Greatness. All rights reserved.
+        Virgitab International School. All rights reserved.
       </p>
     </div>
   </footer>

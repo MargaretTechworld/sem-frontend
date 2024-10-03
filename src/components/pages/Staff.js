@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/staff.css';
-import team from '../../images/team.png';
+import team from '../../images/staff.jpeg';
 
 const Staff = () => (
   <div className="staff-section">
