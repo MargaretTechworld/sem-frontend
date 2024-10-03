@@ -24,12 +24,9 @@ const Navigation = () => {
         <div className="mobile-menu">
           <div className="logo-name">
             <img src={logoTwo} alt="logo-sec" className="logo-sec" />
-            <div className="destined-name">
+            <div className="virgitab-name">
               <p>
-                Destined for Greatness
-                <br />
-                {' '}
-                School
+                Virgitab International School
               </p>
             </div>
           </div>
