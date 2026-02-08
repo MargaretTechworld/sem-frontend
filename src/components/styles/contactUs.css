@@ -9,7 +9,7 @@
   font-size: 24px;
   margin-bottom: 20px;
   text-align: center;
-  color: #4b0082;
+  color: black;
 }
 
 .contact-form input,
@@ -57,21 +57,24 @@
 }
 
 .contact-form button {
-  background-color: #4caf50;
-  color: white;
+  background-color: #000;
+  color: #dec97f;
   padding: 12px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
+  transition: background-color 0.3s ease;
 }
 
 .contact-form button:hover {
-  background-color: #45a049;
+  background-color: #dec97f;
+  color: #000;
 }
 
 .contact-form button:active {
-  background-color: #3e8e41;
+  background-color: #333;
+  color: white;
 }
 
 @media (max-width: 768px) {

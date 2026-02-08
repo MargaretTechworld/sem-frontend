@@ -1,0 +1,265 @@
+/* =========================
+   Login Modal Styles
+========================= */
+
+.login-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+.login-modal-container {
+  position: relative;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 25%, #0f3460 50%, #e94560 75%, #533483 100%);
+  border-radius: 20px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  max-width: 450px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: modalSlideIn 0.4s ease-out;
+}
+
+.login-modal-header {
+  position: relative;
+  border-bottom: 1px solid rgba(222, 201, 127, 0.2);
+  background: rgba(222, 201, 127, 0.1);
+}
+
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  font-weight: 800;
+  color: black;
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+  color: #fff;
+  background: rgba(222, 201, 127, 0.2);
+  transform: rotate(90deg);
+}
+
+.login-modal-content {
+  padding: 30px;
+  text-align: center;
+}
+
+.login-form {
+  margin-bottom: 20px;
+}
+
+.login-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 15px;
+  text-align: center;
+  background: linear-gradient(135deg, #dec97f 0%, #fff 50%, #dec97f 100%);
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+
+.login-subtitle {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid rgba(222, 201, 127, 0.3);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #dec97f;
+  box-shadow: 0 0 10px rgba(222, 201, 127, 0.2);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.form-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.checkbox-group {
+  margin-bottom: 25px;
+  text-align: left;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.checkbox-input {
+  margin-right: 8px;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.checkbox-text {
+  user-select: none;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 14px 24px;
+  background: linear-gradient(135deg, #dec97f 0%, #b8a862 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 8px 20px rgba(222, 201, 127, 0.3);
+}
+
+.login-btn:hover {
+  background: linear-gradient(135deg, #b8a862 0%, #dec97f 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(222, 201, 127, 0.4);
+}
+
+.switch-mode {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid rgba(222, 201, 127, 0.2);
+}
+
+.switch-text {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  margin-right: 10px;
+}
+
+.switch-btn {
+  background: none;
+  border: none;
+  color: #dec97f;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: all 0.3s ease;
+  padding: 5px 0;
+}
+
+.switch-btn:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Animations */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalSlideIn {
+  from {
+    transform: translateY(-50px) scale(0.9);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .login-modal-container {
+    width: 95%;
+    margin: 20px;
+  }
+
+  .login-title {
+    font-size: 1.5rem;
+  }
+
+  .form-input {
+    padding: 10px 14px;
+  }
+
+  .login-btn {
+    padding: 12px 20px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-modal-container {
+    width: 98%;
+    margin: 10px;
+  }
+
+  .login-title {
+    font-size: 1.3rem;
+    padding: 8px 15px;
+  }
+
+  .form-input {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+
+  .login-btn {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+}

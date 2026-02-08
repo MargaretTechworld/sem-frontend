@@ -5,7 +5,7 @@ import '../styles/contactUs.css';
 
 const ContactUs = () => (
   <div>
-    <Intro heading="About Us" paragraph="We are the chosen generation" />
+    <Intro heading="Contact Us" />
     <div className="contact-page">
       <div className="contact-info">
         <div className="contact-info-div">

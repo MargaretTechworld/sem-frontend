@@ -23,7 +23,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(75, 0, 130, 0.96);
+  background-color: rgba(0, 0, 0, 0.9);
   z-index: 1;
 }
 
@@ -39,7 +39,7 @@
   margin-bottom: 3%;
   font-weight: 900;
   text-align: center;
-  color: rgb(240, 201, 5);
+  color: #dec97f;
 }
 
 .whyUs > div h2 {
@@ -48,7 +48,7 @@
 
 .date {
   text-align: center;
-  color: rgb(218, 195, 121);
+  color: #dec97f;
   font-weight: bold;
   margin-bottom: 10px;
 }
@@ -60,7 +60,7 @@
 }
 
 .read-me {
-  color: rgb(240, 201, 5);
+  color: #dec97f;
   margin-top: 20px;
   margin-bottom: 20px;
   font-size: 10px;
@@ -75,7 +75,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  color: rgb(240, 201, 5);
+  color: #dec97f;
   position: absolute;
   cursor: pointer;
   z-index: 10;
@@ -86,7 +86,8 @@
 }
 
 .arrow:hover {
-  color: pink;
+  color: #000;
+  background-color: #dec97f;
 }
 
 .prev-test {

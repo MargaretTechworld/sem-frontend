@@ -1,9 +1,15 @@
 .news-section {
-  width: 100%;
+  width: 80%;
   background-color: #fff;
   padding: 10px;
   border-radius: 8px;
   text-align: center;
+  margin: 0 auto;
+  margin-bottom: 3%;
+}
+
+.news-section p {
+  margin-bottom: 3%;
 }
 
 .news-section-heading {
@@ -15,24 +21,26 @@
 .event-drop {
   display: flex;
   justify-content: space-between;
-  background-color: #c0c0c0;
-  border-bottom: 1px solid #4b0082;
-  color: #4b0082;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #dec97f;
+  color: #000;
   padding: 4%;
-  transition: background-color 0.3ms;
+  transition: background-color 0.3s;
 }
 
 .event-drop:hover {
   cursor: pointer;
-  background-color: #958f8f;
+  background-color: #dec97f;
+  color: #000;
 }
 
 .events-cont {
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid black;
-  padding: 0.7%;
+  padding: 2%;
   flex-direction: column;
+  align-items: flex-start;
 }
 
 .event-first {
@@ -60,6 +68,16 @@
   font-weight: 700;
   font-size: 18px;
   text-align: left;
+  margin-bottom: 8px;
+}
+
+.event-answer {
+  font-weight: 400;
+  font-size: 16px;
+  text-align: left;
+  color: #555;
+  line-height: 1.5;
+  margin-top: 0;
 }
 
 .uppercase {
@@ -67,7 +85,8 @@
 }
 
 .event-attend {
-  background-color: #bbb;
+  background-color: #dec97f;
+  color: #000;
   font-size: 12px;
   padding: 3px;
   border-radius: 4px;
@@ -75,16 +94,17 @@
 }
 
 .event-more {
-  background-color: #c0c0c0;
+  background-color: #f5f5f5;
+  color: #000;
   padding: 4px;
-  border: 0.5px solid black;
+  border: 0.5px solid #dec97f;
   transition: background-color 0.5s ease;
   font-size: 12px;
 }
 
 .event-more:hover {
-  background-color: #4b0082;
-  color: #fff;
+  background-color: #dec97f;
+  color: #000;
   cursor: pointer;
 }
 
@@ -93,8 +113,8 @@
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  color: #fff;
-  background-color: #652793;
+  color: white;
+  background-color: #000;
   padding: 12px 24px;
   border-radius: 4px;
   transition: background-color 0.3s ease;
@@ -103,7 +123,8 @@
 }
 
 .download-link:hover {
-  background-color: #280434;
+  background-color: #dec97f;
+  color: #000;
 }
 
 .download-icon {
@@ -134,7 +155,7 @@
   }
 
   .events-cont {
-    flex-direction: row;
+    padding: 1.5%;
   }
 
   .event-name {

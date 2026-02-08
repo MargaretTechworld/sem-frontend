@@ -1,85 +1,262 @@
+/* =========================
+   Article-Style News Pages
+   Magazine-Style Article Layout
+========================= */
+
+.news-event-section {
+  min-height: 100vh;
+  background: #fafbfc;
+}
+
 .news-event-content {
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: center;
-  gap: 3%;
-  justify-content: space-around;
-  width: 100%;
-  padding: 1% 5%;
-
-  /* margin: 1% 5%; */
-
-  /* border-bottom: 1px solid black; */
+  background: #fff;
+  margin: 3rem auto;
+  max-width: 900px;
+  width: 95%;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e1e5e9;
 }
 
-.news-event-img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-.news-event-button.news-event {
-  background-color: rgb(244, 0, 0);
-  color: white;
-}
-
-.horizaontal-rule {
-  width: 90%;
-  margin: 0 auto;
-}
-
-.read-me {
-  background-color: transparent;
-  color: red;
-  font-size: 16px;
-  padding: 0;
-  border: none;
-  text-decoration: underline;
-  font-weight: 300;
-  font-style: italic;
-  margin: 0;
-}
-
-.calender-event {
-  margin-top: 20px;
+.news-event-content:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
 }
 
 .news-event-sub-content {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  display: block;
 }
 
-.news-event-button {
-  background-color: rgb(245, 241, 241);
-  padding: 0.3% 2%;
-  color: rgb(51, 51, 51);
+.news-event-image {
+  width: 100%;
+  height: 350px;
+  position: relative;
+  overflow: hidden;
 }
 
-.news-event-date-type {
-  display: flex;
-  gap: 20px;
+.news-event-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
 }
 
-.news-event-paragraph {
-  font-size: 16px;
+.news-event-content:hover .news-event-image img {
+  transform: scale(1.02);
+}
+
+.news-event-image::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.3) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.news-event-content:hover .news-event-image::after {
+  opacity: 1;
+}
+
+.news-event-text {
+  padding: 3rem 2.5rem;
+  background: #fff;
+  display: block !important;
+  visibility: visible !important;
+}
+
+.news-event-text h3 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  position: relative;
+  display: block !important;
+  visibility: visible !important;
+}
+
+.news-event-text h3::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #dec97f 0%, #b8a862 100%);
+  border-radius: 2px;
+}
+
+.news-event-text p {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: #4a5568;
+  margin-bottom: 2.5rem;
   font-weight: 400;
-  line-height: 24px;
-  color: rgb(51, 51, 51);
+  letter-spacing: -0.01em;
+  text-align: justify;
+  display: block !important;
+  visibility: visible !important;
 }
 
-@media (max-width: 768px) {
-  .news-event-img-div {
-    width: 100%;
-  }
+.read-more-btn {
+  background: linear-gradient(135deg, #dec97f 0%, #b8a862 100%);
+  color: #000;
+  border: none;
+  padding: 1rem 2.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(222, 201, 127, 0.3);
+  display: inline-block !important;
+  visibility: visible !important;
 }
+
+.read-more-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(222, 201, 127, 0.4);
+  background: linear-gradient(135deg, #b8a862 0%, #dec97f 100%);
+}
+
+.calender-event {
+  margin-top: 4rem;
+  padding: 0 2rem;
+}
+
+/* Article-style separator */
+.news-event-content:not(:last-child)::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, #e1e5e9 50%, transparent 100%);
+  margin: 3rem 0;
+}
+
+/* =========================
+   Responsive Design
+========================= */
 
 @media (min-width: 768px) {
-  .news-event-img {
-    width: 300px;
+  .news-event-content {
+    margin: 4rem auto;
+    max-width: 1000px;
   }
 
+  .news-event-sub-content {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 2rem;
+  }
+
+  .news-event-image {
+    height: 100%;
+    min-height: 320px;
+    border-radius: 8px 0 0 8px;
+  }
+
+  .news-event-text {
+    padding: 3rem;
+  }
+
+  .news-event-text h3 {
+    font-size: 2rem;
+  }
+
+  .news-event-text p {
+    font-size: 1.05rem;
+  }
+}
+
+@media (min-width: 1024px) {
   .news-event-content {
-    flex-direction: row;
+    max-width: 1100px;
+  }
+
+  .news-event-image {
+    min-height: 360px;
+  }
+
+  .news-event-text {
+    padding: 3.5rem;
+  }
+
+  .news-event-text h3 {
+    font-size: 2.25rem;
+  }
+}
+
+/* Mobile Styles */
+@media (max-width: 767px) {
+  .news-event-content {
+    margin: 2rem auto;
+    width: 95%;
+    border-radius: 8px;
+  }
+
+  .news-event-image {
+    height: 280px;
+  }
+
+  .news-event-text {
+    padding: 2.5rem 2rem;
+  }
+
+  .news-event-text h3 {
+    font-size: 1.8rem;
+  }
+
+  .news-event-text p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    text-align: left;
+  }
+
+  .read-more-btn {
+    padding: 0.9rem 2rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* Article-style animations */
+
+.news-event-content:nth-child(1) { animation-delay: 0.1s; }
+.news-event-content:nth-child(2) { animation-delay: 0.25s; }
+.news-event-content:nth-child(3) { animation-delay: 0.4s; }
+.news-event-content:nth-child(4) { animation-delay: 0.55s; }
+.news-event-content:nth-child(5) { animation-delay: 0.7s; }
+
+/* Modern Focus States */
+.news-event-content:focus-within {
+  outline: 2px solid #dec97f;
+  outline-offset: 4px;
+}
+
+/* Contemporary Scroll Effects */
+@media (prefers-reduced-motion: no-preference) {
+  .news-event-content {
+    will-change: transform;
+  }
+}
+
+@keyframes articleFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

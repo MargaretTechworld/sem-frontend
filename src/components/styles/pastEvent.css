@@ -2,6 +2,14 @@
   width: 60%;
 }
 
+.past-event p {
+  color: white;
+}
+
+.past-e-h {
+  background-color: #000;
+}
+
 .past-events-top {
   padding: 2% 5% 0.4% 5%;
 }
@@ -14,13 +22,13 @@
 }
 
 .sect-p {
-  color: #383535;
+  color: #fff;
   text-align: center;
   margin-bottom: 10px;
 }
 
 .sect-heading {
-  color: #4b0082;
+  color: #dec97f;
   text-align: center;
   margin-bottom: 10px;
 }

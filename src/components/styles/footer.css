@@ -1,7 +1,7 @@
 .home-contact-section {
-  background-color: #510885;
-  color: rgb(242, 239, 239);
-  margin-top: 4%;
+  background-color: black;
+  color: #dec97f;
+  margin-top: 0;
 }
 
 .home-contact-container {
@@ -44,8 +44,8 @@
 .footer-bottom {
   width: 100%;
   padding: 10px;
-  background-color: #fff;
-  color: #150024;
+  background-color: #dec97f;
+  color: black;
 }
 
 .footer-bottom p {
@@ -56,7 +56,7 @@
   width: 30px;
   margin-bottom: 20px;
   height: 4px;
-  background-color: white;
+  background-color: #dec97f;
 }
 
 .flip-icon {

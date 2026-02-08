@@ -11,12 +11,12 @@
 }
 
 .middle-list li {
-  border-bottom: 1px solid #4b0082;
+  border-bottom: 1px solid #dec97f;
 }
 
 .mobile-menu {
   position: sticky;
-  padding: 1% 5%;
+  padding: 4% 5%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -25,11 +25,18 @@
 .menu-section {
   display: flex;
   flex-direction: column;
+  background-color: black;
+  position: relative;
+  z-index: 9999;
 }
 
 .logo-sec {
-  width: 90px;
+  width: 200px;
   object-fit: cover;
+  top: -90%;
+  z-index: 9999;
+  position: absolute;
+  left: -10%;
 }
 
 .destined-name {
@@ -39,7 +46,7 @@
 .destined-name p {
   font-weight: 900;
   font-size: 15px;
-  color: #4b0082;
+  color: #dec97f;
 }
 
 .logo-name {
@@ -59,7 +66,7 @@
   position: absolute;
   height: 0.2rem;
   width: 100%;
-  background-color: #4b0082;
+  background-color: #dec97f;
   border-radius: 0.2rem;
   transition: transform 0.3s ease-in-out;
 }
@@ -70,10 +77,9 @@
 
 .open {
   display: flex;
-
-  /* background-color: #4b0082; */
-  padding-top: 10%;
-  color: #4b0082;
+  background-color: black;
+  padding-top: 20%;
+  color: gold;
   list-style: none;
   padding-bottom: 10%;
 }
@@ -106,7 +112,7 @@
 
 .list {
   font-weight: 600;
-  color: #4b0082;
+  color: #dec97f;
   text-decoration: none;
   padding: 5%;
   font-size: 24px;
@@ -114,7 +120,7 @@
 
 .login {
   font-weight: 600;
-  color: #4b0082;
+  color: #dec97f;
   text-decoration: none;
   padding: 5%;
   font-size: 24px;
@@ -143,20 +149,26 @@
   .login {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #5f0693;
-    color: white;
+    background-color: #dec97f;
     text-decoration: none;
+    color: black;
     font-size: 16px;
     border-radius: 4px;
     cursor: pointer;
   }
 
+  .logo-sec {
+    top: -160%;
+    left: -8%;
+  }
+
   .login:hover {
-    background-color: #b614df;
+    background-color: rgb(240, 239, 239);
+    color: black;
   }
 
   .login:active {
-    background-color: #9e0dd8;
+    background-color: #000;
     text-decoration: none;
   }
 
@@ -187,7 +199,6 @@
   }
 
   .list {
-    color: #4b0082;
     padding: 0;
     font-size: 0.99rem;
   }

@@ -54,7 +54,7 @@ const Footer = () => (
         &copy;
         {new Date().getFullYear()}
         {' '}
-        Destined for Greatness. All rights reserved.
+        Tovanah. All rights reserved.
       </p>
     </div>
   </footer>

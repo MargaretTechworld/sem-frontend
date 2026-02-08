@@ -1,37 +1,72 @@
-import React from 'react';
-import { FaStar } from 'react-icons/fa';
+import React, { useEffect, useState } from 'react';
 import '../styles/welcome.css';
 
-const Welcome = () => (
-  <div className="welcome-container">
-    <div className="welcome-video">
-      <iframe
-        className="video-frame"
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/BEwtu7vKPJk?si=61rlN1fQ7jfSXV_W"
-        title="YouTube video player"
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerPolicy="strict-origin-when-cross-origin"
+const Welcome = () => {
+  const [textIndex, setTextIndex] = useState(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [nextImageIndex, setNextImageIndex] = useState(1);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  const texts = [
+    'WELCOME TO TOVANAH CONSULTING LTD.',
+    'ENROLL FOR OUR NEW COURSE ON LEADERSHIP',
+    'ENROLL FOR MENTORSHIP',
+  ];
+
+  const images = [
+    require('../../images/pic 1.jpeg'),
+    require('../../images/pic 2.jpg'),
+    require('../../images/pic 3.jpg'),
+    require('../../images/pic 4.jpg'),
+  ];
+
+  useEffect(() => {
+    const textInterval = setInterval(() => {
+      setTextIndex((prevIndex) => (prevIndex + 1) % texts.length);
+    }, 8000); // Increased to 8 seconds for slower changes
+
+    const imageInterval = setInterval(() => {
+      setIsTransitioning(true);
+
+      // After transition completes, update indices
+      setTimeout(() => {
+        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+        setNextImageIndex((prevIndex) => (prevIndex + 2) % images.length);
+        setIsTransitioning(false);
+      }, 2500); // Increased to 2.5 seconds for slower transition
+    }, 8000); // Increased to 8 seconds for slower changes
+
+    return () => {
+      clearInterval(textInterval);
+      clearInterval(imageInterval);
+    };
+  }, [texts.length, images.length]);
+
+  return (
+    <div className="welcome-container">
+      {/* Current image - always visible */}
+      <img
+        src={images[currentImageIndex]}
+        alt="Welcome background current"
+        className="welcome-background-image current"
       />
-    </div>
-    <div className="welcome-text">
-      <h2 className="welcome-heading">
-        WELCOME
-        <br />
-        TO DESTINED FOR GRATENESS DAYCARE AND PRIMARY SCHOOL
-      </h2>
-      <div className="stars-container">
-        <FaStar className="star-icon" />
-        <FaStar className="star-icon" />
-        <FaStar className="star-icon" />
+
+      {/* Next image - fades in during transition */}
+      <img
+        src={images[nextImageIndex]}
+        alt="Welcome background next"
+        className={`welcome-background-image next ${isTransitioning ? 'visible' : ''}`}
+      />
+
+      <div className="welcome-overlay" />
+      <div className="welcome-text">
+        <h2 className="welcome-heading">
+          {texts[textIndex]}
+        </h2>
+        <button type="button" className="welcome-btn" onClick={() => {}}>Apply Now</button>
       </div>
-      <p className="moto">We are a choosen generation</p>
-      <p className="scripture-verse">1 Peter 2:9</p>
-      <p className="learn-more-link">Learn More</p>
     </div>
-  </div>
-);
+  );
+};
 
 export default Welcome;

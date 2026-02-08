@@ -1,0 +1,175 @@
+/* CEO Bio Page Styles */
+
+.ceo-bio-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.ceo-bio-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.ceo-bio-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 3rem;
+  background: white;
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.ceo-bio-image {
+  margin-bottom: 2rem;
+}
+
+.ceo-bio-image img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid #dec97f;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.ceo-bio-title h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.ceo-bio-title h2 {
+  font-size: 1.5rem;
+  color: #dec97f;
+  font-weight: 500;
+  margin: 0;
+}
+
+.ceo-bio-content {
+  background: white;
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.ceo-bio-text {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.bio-paragraph {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 2rem;
+  text-align: justify;
+}
+
+.bio-paragraph::first-letter {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #dec97f;
+  float: left;
+  margin-right: 0.5rem;
+  line-height: 1;
+}
+
+.ceo-bio-actions {
+  text-align: center;
+}
+
+.back-btn {
+  background: #dec97f;
+  color: black;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(222, 201, 127, 0.3);
+}
+
+.back-btn:hover {
+  background: #b8a862;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(222, 201, 127, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .ceo-bio-container {
+    padding: 1rem;
+  }
+
+  .ceo-bio-header {
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .ceo-bio-image img {
+    width: 150px;
+    height: 150px;
+  }
+
+  .ceo-bio-title h1 {
+    font-size: 2rem;
+  }
+
+  .ceo-bio-title h2 {
+    font-size: 1.2rem;
+  }
+
+  .ceo-bio-content {
+    padding: 2rem;
+  }
+
+  .bio-paragraph {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .bio-paragraph::first-letter {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .ceo-bio-header {
+    padding: 1.5rem;
+  }
+
+  .ceo-bio-image img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .ceo-bio-title h1 {
+    font-size: 1.8rem;
+  }
+
+  .ceo-bio-title h2 {
+    font-size: 1.1rem;
+  }
+
+  .ceo-bio-content {
+    padding: 1.5rem;
+  }
+
+  .bio-paragraph {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .back-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+}

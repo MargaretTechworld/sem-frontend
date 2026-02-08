@@ -1,23 +1,363 @@
-.about-us-div {
+/* =========================
+   Intro Animated Background
+========================= */
+
+.intro-animated-background {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  background-color: #4b0082;
+  height: 100%;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 25%, #0f3460 50%, #e94560 75%, #533483 100%);
+  z-index: 1;
+}
+
+/* Animated Bubbles */
+.intro-bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3), rgba(222, 201, 127, 0.1));
+  box-shadow:
+    0 0 20px rgba(222, 201, 127, 0.3),
+    inset 0 0 20px rgba(255, 255, 255, 0.1);
+  animation: intro-float-up 8s infinite ease-in-out;
+}
+
+.intro-bubble-1 {
+  width: 60px;
+  height: 60px;
+  left: 10%;
+  animation-delay: 0s;
+  animation-duration: 12s;
+}
+
+.intro-bubble-2 {
+  width: 45px;
+  height: 45px;
+  left: 25%;
+  animation-delay: 2s;
+  animation-duration: 10s;
+}
+
+.intro-bubble-3 {
+  width: 75px;
+  height: 75px;
+  left: 45%;
+  animation-delay: 4s;
+  animation-duration: 14s;
+}
+
+.intro-bubble-4 {
+  width: 35px;
+  height: 35px;
+  left: 60%;
+  animation-delay: 1s;
+  animation-duration: 8s;
+}
+
+.intro-bubble-5 {
+  width: 50px;
+  height: 50px;
+  left: 75%;
+  animation-delay: 3s;
+  animation-duration: 11s;
+}
+
+.intro-bubble-6 {
+  width: 65px;
+  height: 65px;
+  left: 90%;
+  animation-delay: 5s;
+  animation-duration: 13s;
+}
+
+@keyframes intro-float-up {
+  0%,
+  100% {
+    transform: translateY(100px) rotate(0deg);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 0.8;
+  }
+}
+
+/* Animated Binoculars */
+.intro-binoculars-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  animation: intro-binoculars-float 6s infinite ease-in-out;
+}
+
+.intro-binoculars {
+  position: relative;
+  width: 150px;
+  height: 60px;
+  transform: rotate(-15deg);
+}
+
+.intro-binocular-left,
+.intro-binocular-right {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #2c3e50 100%);
+  border-radius: 50%;
+  border: 2px solid #dec97f;
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.3),
+    inset 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.intro-binocular-left {
+  left: 0;
+  animation: intro-binocular-left-pulse 4s infinite ease-in-out;
+}
+
+.intro-binocular-right {
+  right: 0;
+  animation: intro-binocular-right-pulse 4s infinite ease-in-out;
+  animation-delay: 2s;
+}
+
+.intro-lens {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 35px;
+  height: 35px;
+  background: radial-gradient(circle, #4a90e2 0%, #357abd 50%, #2e5a8e 100%);
+  border-radius: 50%;
+  border: 1px solid #1a4d80;
+  overflow: hidden;
+}
+
+.intro-lens-reflection {
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  width: 10px;
+  height: 10px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 70%);
+  border-radius: 50%;
+  animation: intro-lens-shine 3s infinite ease-in-out;
+}
+
+.intro-lens-light {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 15px;
+  height: 15px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 60%);
+  border-radius: 50%;
+  animation: intro-lens-glow 2s infinite ease-in-out alternate;
+}
+
+.intro-eyepiece {
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 10px;
+  background: linear-gradient(90deg, #1a1a1a 0%, #333 50%, #1a1a1a 100%);
+  border-radius: 0 0 10px 10px;
+  border: 1px solid #dec97f;
+}
+
+.intro-binocular-bridge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 6px;
+  background: linear-gradient(90deg, #2c3e50 0%, #34495e 50%, #2c3e50 100%);
+  border: 1px solid #dec97f;
+  border-radius: 3px;
+}
+
+.intro-bridge-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  background: radial-gradient(circle, #dec97f 0%, #b8a862 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(222, 201, 127, 0.5);
+}
+
+@keyframes intro-binoculars-float {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) translateY(0) rotate(-15deg);
+  }
+
+  50% {
+    transform: translate(-50%, -50%) translateY(-8px) rotate(-15deg);
+  }
+}
+
+@keyframes intro-binocular-left-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes intro-binocular-right-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes intro-lens-shine {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: translate(0, 0);
+  }
+
+  50% {
+    opacity: 0.8;
+    transform: translate(3px, 3px);
+  }
+}
+
+@keyframes intro-lens-glow {
+  0% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+
+  100% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
+
+/* Floating Elements */
+.intro-floating-element {
+  position: absolute;
+  font-size: 20px;
+  animation: intro-element-float 6s infinite ease-in-out;
+  opacity: 0.8;
+  text-shadow: 0 0 10px rgba(222, 201, 127, 0.5);
+  z-index: 2;
+}
+
+.intro-element-1 {
+  top: 20%;
+  left: 5%;
+  animation-delay: 0s;
+}
+
+.intro-element-2 {
+  top: 30%;
+  right: 10%;
+  animation-delay: 1s;
+}
+
+.intro-element-3 {
+  bottom: 25%;
+  left: 15%;
+  animation-delay: 2s;
+}
+
+.intro-element-4 {
+  top: 15%;
+  left: 35%;
+  animation-delay: 3s;
+}
+
+.intro-element-5 {
+  bottom: 20%;
+  right: 15%;
+  animation-delay: 4s;
+}
+
+.intro-element-6 {
+  top: 40%;
+  right: 5%;
+  animation-delay: 5s;
+}
+
+@keyframes intro-element-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  25% {
+    transform: translateY(-12px) rotate(5deg);
+  }
+
+  50% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  75% {
+    transform: translateY(12px) rotate(-5deg);
+  }
+}
+
+/* =========================
+   Original Intro Styles
+========================= */
+
+.about-us-div {
+  position: relative;
+  width: 100%;
+  background-color: transparent;
   color: white;
   height: 30vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.about-us-paragraph {
-  text-align: center;
-  width: 60%;
-  line-height: 24px;
+  z-index: 10;
 }
 
 .about-us-heading {
+  position: relative;
+  z-index: 20;
   text-align: center;
-  margin-bottom: 10px;
+
+  /* width: 30%; */
+  line-height: 24px;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 15px 20px;
+  border-radius: 8px;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(222, 201, 127, 0.3);
 }
 
 @media (max-width: 768px) {

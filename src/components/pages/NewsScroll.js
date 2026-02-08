@@ -9,7 +9,7 @@ const NewsScroll = () => (
       <div className="news-container">
 
         <div className="title">
-          School News
+          Recent News
         </div>
 
         {data?.News?.map((item) => (

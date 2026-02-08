@@ -1,66 +1,59 @@
-import React, { useState } from 'react';
-import Intro from './Intro';
-import '../styles/newsEvents.css';
-import data from '../data/index.json';
-import SchoolCalendar from './SchoolCalendar';
+// import React, { useState } from 'react';
+// import Intro from './Intro';
+// import '../styles/newsEvents.css';
+// import data from '../data/index.json';
+// import SchoolCalendar from './SchoolCalendar';
 
-const NewsEvents = () => {
-  const [expandedItemId, setExpandedItemId] = useState(null);
+// const NewsEvents = () => {
+//   const [expandedItemId, setExpandedItemId] = useState(null);
 
-  const handleReadMore = (itemId) => {
-    setExpandedItemId(itemId);
-  };
+//   const handleReadMore = (itemId) => {
+//     setExpandedItemId(expandedItemId === itemId ? null : itemId);
+//   };
 
-  return (
-    <div className="news-event-section">
-      <Intro heading="NEWS & EVENTS" paragraph="" />
-      {data?.News?.map((item) => (
-        <>
-          <div key={item.id} className="news-event-content">
-            <div className="news-event-sub-content">
-              <h2 className="news-event-heading">{item['news-heading']}</h2>
-              <div className="news-event-date-type">
-                <p className="news-event-button news-event" type="button">
-                  {item.type}
-                </p>
-                <p className="news-event-button" type="button">
-                  {item['news-date']}
-                </p>
-              </div>
-              <p className="news-event-paragraph">
-                {expandedItemId === item.id
-                  ? item['news-info']
-                  : `${item['news-info'].split(' ').slice(0, 30).join(' ')} `}
-                {expandedItemId !== item.id && (
-                  <span>
-                    <button
-                      className="read-me"
-                      type="button"
-                      href="#"
-                      onClick={() => handleReadMore(item.id)}
-                    >
-                      read more
-                    </button>
-                  </span>
-                )}
-              </p>
-            </div>
-            <div className="news-event-img-div">
-              <img
-                className="news-event-img"
-                alt="news"
-                src={item['news-image']}
-              />
-            </div>
-          </div>
-          <hr className="horizaontal-rule" />
-        </>
-      ))}
-      <div className="calender-event">
-        <SchoolCalendar />
-      </div>
-    </div>
-  );
-};
+//   return (
+//     <div className="news-event-section">
+//       <Intro heading="NEWS & EVENTS" />
+//       {data?.News?.map((item) => (
+//         <>
+//           <div key={item.id} className="news-event-content">
+//             <div className="news-event-sub-content">
+//               <div className="news-event-image">
+//                 <img src={item["news-image"]} alt={item["news-heading"]} />
+//               </div>
+//               <div className="news-event-text">
+//                 <h3>{item["news-heading"]}</h3>
+//                 <p>
+//                   {expandedItemId === item.id
+//                     ? (item["news-info"] || 'Content not available')
+//                     : `${(item["news-info"] || '').substring(0, 200)}${(item["news-info"] && item["news-info"].length > 200) ? '...' : ''}`}
+//                 </p>
+//                 {expandedItemId !== item.id && (
+//                 <button
+//                   type="button"
+//                   className="read-more-btn"
+//                   onClick={() => handleReadMore(item.id)}
+//                 >
+//                   Read More
+//                 </button>
+//                 )}
+//               </div>
+//             </div>
+//           </div>
+//         </>
+//       ))}
+//       <div className="calender-event">
+//         <SchoolCalendar />
+//       </div>
+//     </div>
+//   );
+// };
 
+// export default NewsEvents;
+
+const NewsEvents = () => (
+  <div>
+    <p>Coming Soon</p>
+  </div>
+);
 export default NewsEvents;

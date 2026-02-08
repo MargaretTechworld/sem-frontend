@@ -2,12 +2,8 @@ import React from 'react';
 import Intro from './Intro';
 import AboutNav from './AboutNav';
 import '../styles/about.css';
-import mission from '../../images/mission.png';
-import whyUs from '../../images/why-us.png';
-import goals from '../../images/our-goals.png';
-
+import mission from '../../images/bg2.jpg';
 import Testimonials from './Testimonials';
-import Staff from './Staff';
 
 const About = () => {
   const links = [
@@ -15,12 +11,11 @@ const About = () => {
     { to: '#WhyUs', label: 'Why Us', id: 'WhyUs' },
     { to: '#Our Goals', label: 'Our Goals', id: 'Our Goals' },
     { to: '#Testimonies', label: 'Testimonies', id: 'Testimonies' },
-    { to: '#Staff', label: 'Staff', id: 'Staff' },
   ];
 
   return (
     <div className="about-us">
-      <Intro heading="About Us" paragraph="We are the chosen generation" />
+      <Intro heading="About Us" paragraph="" />
       <div className="about-with-sidemenu">
         <AboutNav
           links={links}
@@ -60,10 +55,10 @@ const About = () => {
                 volutpat.
               </p>
             </div>
-            <img className="mission-img" src={whyUs} alt="img2" />
+            <img className="mission-img" src={mission} alt="img2" />
           </div>
           <div className="about-us-third-div">
-            <img className="mission-img" src={goals} alt="img2" />
+            <img className="mission-img" src={mission} alt="img2" />
             <div id="Our Goals">
               <h2>Our Goals</h2>
               <p className="mission-paragraph">
@@ -85,10 +80,6 @@ const About = () => {
       <div id="Testimonies" className="about-testimonies">
         <Testimonials />
       </div>
-      <div id="Staff">
-        <Staff />
-      </div>
-
     </div>
   );
 };
