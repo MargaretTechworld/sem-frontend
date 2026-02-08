@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import coursesData from '../data/coursesData';
 import '../styles/allCourses.css';
-import Intro from './Intro';
+// import Intro from './Intro';
 
 const AllCourses = () => {
   const navigate = useNavigate();
@@ -50,9 +50,9 @@ const AllCourses = () => {
 
   return (
     <div className="all-courses-page">
-      <Intro
+      {/* <Intro
         heading="All Professional Courses"
-      />
+      /> */}
 
       <div className="courses-controls">
         <div className="search-bar">
