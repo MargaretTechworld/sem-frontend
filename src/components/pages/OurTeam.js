@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Intro from './Intro';
+// import Intro from './Intro';
 import AboutNav from './AboutNav';
 import Ceo from '../../images/ceo.jpg';
 import '../styles/ourTeam.css';
@@ -165,9 +165,9 @@ const OurTeam = () => {
   return (
     <div className="our-team-page">
       {/* CEO Section */}
-      <Intro
+      {/* <Intro
         heading="Our Team"
-      />
+      /> */}
       <AboutNav
         links={links}
       />

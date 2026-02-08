@@ -346,6 +346,7 @@
   text-align: center;
   flex-wrap: wrap;
   border-radius: 8px;
+  margin-top: 4%;
   z-index: 10;
 }
 
@@ -375,4 +376,10 @@
 
 .active {
   text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+  .side-menu {
+    margin-top: 1%;
+  }
 }
