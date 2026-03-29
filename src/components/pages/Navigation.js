@@ -57,15 +57,15 @@ const Navigation = () => {
             <span />
           </div>
           {menuOpen && (
-          <div
-            className="close"
-            onClick={toggleMenu}
-            onKeyDown={handleKeyDown}
-            role="button"
-            tabIndex={0}
-          >
-            X
-          </div>
+            <div
+              className="close"
+              onClick={toggleMenu}
+              onKeyDown={handleKeyDown}
+              role="button"
+              tabIndex={0}
+            >
+              X
+            </div>
           )}
 
         </div>
@@ -102,14 +102,26 @@ const Navigation = () => {
               </NavLink>
             </li>
             <li>
+              <NavLink className="list" to="/my-applications" aria-label="My Applications" onClick={() => setMenuOpen(false)}>
+                My Applications
+              </NavLink>
+            </li>
+            <li>
               <NavLink className="list" to="/contact-us" aria-label="Contact Us" onClick={() => setMenuOpen(false)}>
                 Contact Us
               </NavLink>
             </li>
             <li>
-              <NavLink className="login" to="/resources" aria-label="Contact Us" onClick={() => { setMenuOpen(false); openLoginModal(); }}>
+              <button
+                type="button"
+                className="login"
+                onClick={() => { setMenuOpen(false); openLoginModal(); }}
+                style={{
+                  background: 'none', border: 'none', cursor: 'pointer', font: 'inherit',
+                }}
+              >
                 Login
-              </NavLink>
+              </button>
             </li>
           </ul>
 

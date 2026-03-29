@@ -1,25 +1,45 @@
-import React from 'react';
-import '../styles/newsScroll.css';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { NavLink } from 'react-router-dom';
-import data from '../data/index.json';
+import '../styles/newsScroll.css';
 
-const NewsScroll = () => (
-  <div>
-    <NavLink to="/news-events">
-      <div className="news-container">
+const NewsScroll = () => {
+  const [news, setNews] = useState([]);
 
-        <div className="title">
-          Recent News
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const { data } = await axios.get('http://localhost:5000/api/content/news');
+        const formattedNews = data.sections.map((section) => {
+          try {
+            return { id: section.key, ...JSON.parse(section.content) };
+          } catch (e) {
+            return { id: section.key, title: section.content };
+          }
+        });
+        setNews(formattedNews);
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.error('Error fetching news scroll:', err);
+      }
+    };
+    fetchNews();
+  }, []);
+
+  return (
+    <div>
+      <NavLink to="/news-events">
+        <div className="news-container">
+          <div className="title">Recent News</div>
+          {news.map((item) => (
+            <ul className="news-container-ul" key={item.id}>
+              <li>{item.title}</li>
+            </ul>
+          ))}
         </div>
-
-        {data?.News?.map((item) => (
-          <ul className="news-container-ul" key={item.id}>
-            <li>{item['news-heading']}</li>
-          </ul>
-        ))}
-      </div>
-    </NavLink>
-  </div>
-);
+      </NavLink>
+    </div>
+  );
+};
 
 export default NewsScroll;

@@ -1,4 +1,3 @@
-
 .about-us-second-paragraph {
   text-align: center;
   width: 80%;
@@ -8,61 +7,137 @@
   color: rgb(66, 74, 79);
 }
 
-.about-us-third-div {
-  width: 100%;
+.about-section {
   display: flex;
   align-items: center;
-  padding: 0% 4% 0% 4%;
-  gap: 20px;
+  gap: 40px;
+  padding: 4% 5%;
+  margin-bottom: 40px;
   flex-direction: column;
-  margin-bottom: 20px;
+}
+
+
+
+/* Enhancing the text content */
+.text-content {
+  flex: 1;
 }
 
 .mission-img {
   width: 100%;
+  max-width: 500px;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
 }
 
-.about-testimonies {
-  margin-top: 4%;
-  margin-bottom: 4%;
+.section-title {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 60px;
+  height: 4px;
+  background: #e94560;
+  /* Accent color matching nav */
+  border-radius: 2px;
+}
+
+.center-title {
+  text-align: center;
+  display: block;
+  margin: 0 auto 40px auto;
+}
+
+.center-title::after {
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .mission-paragraph {
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
-  color: rgb(66, 74, 79);
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #555;
+  text-align: justify;
+}
+
+/* Core Values Grid */
+.core-values-section {
+  padding: 4% 5%;
+  background: #f9f9f9;
+  border-radius: 16px;
+  margin: 40px 0;
+}
+
+.core-values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.core-value-card {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  border-top: 4px solid transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.core-value-card:hover {
+  border-top-color: #e94560;
+  transform: translateY(-5px);
+}
+
+.value-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.value-text {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Testimonials */
+.about-testimonies {
+  margin-top: 4%;
+  margin-bottom: 4%;
 }
 
 .about-with-sidemenu {
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 10px;
-}
-
-.about-us-fourth-div {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  padding: 0% 4% 0% 4%;
   gap: 20px;
-  flex-direction: column-reverse;
-  margin-bottom: 20px;
 }
 
+/* Responsive */
 @media (min-width: 768px) {
-  .about-us-fourth-div {
+  .about-section {
     flex-direction: row;
-    margin-bottom: 0;
   }
 
-  .about-us-third-div {
-    flex-direction: row;
-    margin-bottom: 0;
+  .about-us-fourth-div {
+    flex-direction: row-reverse;
+    /* Vision has text left, image right */
   }
 
   .mission-img {
-    height: 300px;
+    height: 350px;
   }
 }

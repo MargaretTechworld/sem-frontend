@@ -1,6 +1,8 @@
+/* eslint-disable no-console */
+/* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import coursesData from '../data/coursesData';
+import axios from 'axios';
 import '../styles/allCourses.css';
 // import Intro from './Intro';
 
@@ -9,12 +11,21 @@ const AllCourses = () => {
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [filter, setFilter] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
+  const [courses, setCourses] = useState([]);
+
+  const fetchCourses = async () => {
+    try {
+      const { data } = await axios.get('http://localhost:5000/api/courses');
+      setCourses(data);
+    } catch (error) {
+      console.error('Error fetching courses', error);
+    }
+  };
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    fetchCourses();
   }, []);
-
-  const courses = coursesData;
 
   const categories = [
     { value: 'all', label: 'All Courses' },
@@ -31,7 +42,7 @@ const AllCourses = () => {
   const filteredCourses = courses.filter((course) => {
     const matchesFilter = filter === 'all' || course.category === filter;
     const matchesSearch = course.title.toLowerCase().includes(searchTerm.toLowerCase())
-                         || course.description.toLowerCase().includes(searchTerm.toLowerCase());
+      || course.description.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesFilter && matchesSearch;
   });
 
@@ -117,11 +128,13 @@ const AllCourses = () => {
             <div className="course-details">
               <div className="course-header">
                 <div className="course-video">
-                  <iframe
-                    src={selectedCourse.videoUrl}
-                    title={selectedCourse.title}
-                    allowFullScreen
-                    className="video-iframe"
+                  <img
+                    src={selectedCourse.image || '/images/sample.jpg'}
+                    alt={selectedCourse.title}
+                    style={{
+                      width: 100 + '%', height: 100 + '%', objectFit: 'cover',
+                    }}
+                    onError={(e) => { e.target.src = '/images/sample.jpg'; }}
                   />
                 </div>
                 <div className="course-info">
@@ -150,8 +163,8 @@ const AllCourses = () => {
                 <div className="section">
                   <h3>What You&apos;ll Learn</h3>
                   <ul className="outcomes-list">
-                    {selectedCourse.outcomes.map((outcome) => (
-                      <li key={`outcome-${selectedCourse.id}-${outcome.replace(/\s+/g, '-').toLowerCase()}`}>{outcome}</li>
+                    {selectedCourse.outcomes && selectedCourse.outcomes.map((outcome) => (
+                      <li key={`outcome-${selectedCourse._id}-${outcome.replace(/\s+/g, '-').toLowerCase()}`}>{outcome}</li>
                     ))}
                   </ul>
                 </div>
@@ -159,8 +172,8 @@ const AllCourses = () => {
                 <div className="section">
                   <h3>Course Modules</h3>
                   <ul className="modules-list">
-                    {selectedCourse.modules.map((module, index) => (
-                      <li key={`module-${selectedCourse.id}-${module.replace(/\s+/g, '-').toLowerCase()}`}>
+                    {selectedCourse.modules && selectedCourse.modules.map((module, index) => (
+                      <li key={`module-${selectedCourse._id}-${module.replace(/\s+/g, '-').toLowerCase()}`}>
                         <span className="module-number">{index + 1}</span>
                         {module}
                       </li>
@@ -171,8 +184,8 @@ const AllCourses = () => {
                 <div className="section">
                   <h3>Requirements</h3>
                   <ul className="requirements-list">
-                    {selectedCourse.requirements.map((req) => (
-                      <li key={`requirement-${selectedCourse.id}-${req.replace(/\s+/g, '-').toLowerCase()}`}>{req}</li>
+                    {selectedCourse.requirements && selectedCourse.requirements.map((req) => (
+                      <li key={`requirement-${selectedCourse._id}-${req.replace(/\s+/g, '-').toLowerCase()}`}>{req}</li>
                     ))}
                   </ul>
                 </div>
@@ -193,7 +206,7 @@ const AllCourses = () => {
         <div className="courses-grid">
           {filteredCourses.map((course) => (
             <div
-              key={course.id}
+              key={course._id}
               className="course-card"
               onClick={() => handleCourseClick(course)}
               onKeyDown={(e) => {
@@ -206,11 +219,13 @@ const AllCourses = () => {
             >
               <div className="course-video-container">
                 <div className="video-wrapper">
-                  <iframe
-                    src={course.videoUrl}
-                    title={course.title}
-                    allowFullScreen
-                    className="video-iframe"
+                  <img
+                    src={course.image || '/images/sample.jpg'}
+                    alt={course.title}
+                    style={{
+                      position: 'absolute', top: 0, left: 0, width: 100 + '%', height: 100 + '%', objectFit: 'cover',
+                    }}
+                    onError={(e) => { e.target.src = '/images/sample.jpg'; }}
                   />
                 </div>
                 <div className="course-level">{course.level}</div>

@@ -1,6 +1,10 @@
+/* eslint-disable no-console */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import { motion } from 'framer-motion';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import coursesData from '../data/coursesData';
+import axios from 'axios';
 import '../styles/recentCourses.css';
 
 // ResizeObserver error handling utility
@@ -8,9 +12,7 @@ const handleResizeObserverError = () => {
   const resizeObserverErrHandler = (error) => {
     if (error.message && error.message.includes('ResizeObserver loop completed with undelivered notifications')) {
       // Ignore this specific error - it's harmless
-
     }
-    // Removed console.error for ESLint compliance
   };
 
   window.addEventListener('error', resizeObserverErrHandler);
@@ -24,13 +26,23 @@ const handleResizeObserverError = () => {
 const RecentCourses = () => {
   const navigate = useNavigate();
   const [selectedCourse, setSelectedCourse] = useState(null);
+  const [courses, setCourses] = useState([]);
 
   useEffect(() => {
     handleResizeObserverError();
-  }, []);
 
-  // Get first 6 courses for recent courses display
-  const courses = coursesData.slice(0, 6);
+    const fetchCourses = async () => {
+      try {
+        const { data } = await axios.get('http://localhost:5000/api/courses');
+        // Get first 6 courses
+        setCourses(data.slice(0, 6));
+      } catch (error) {
+        console.error('Error fetching courses:', error);
+      }
+    };
+
+    fetchCourses();
+  }, []);
 
   const handleCourseClick = (course) => {
     setSelectedCourse(course);
@@ -45,20 +57,51 @@ const RecentCourses = () => {
     navigate('/admission', { state: { course } });
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
+
   return (
     <section className="recent-courses">
       <div className="courses-container">
-        <h1 className="courses-heading">Highlighted Courses to Discover</h1>
-        <div className="course-view">
-          <p className="courses-subtitle">Explore our latest professional development programs</p>
-          <button type="button" onClick={() => navigate('/all-courses')}>See All Courses</button>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <h1 className="courses-heading">Highlighted Courses to Discover</h1>
+          <div className="course-view">
+            <p className="courses-subtitle">Explore our latest professional development programs</p>
+            <button type="button" onClick={() => navigate('/all-courses')}>See All Courses</button>
+          </div>
+        </motion.div>
+
         <div className="courses-slider-container">
-          <div className="grid-card">
+          <motion.div
+            className="grid-card"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
             {courses.map((course) => (
-              <div
-                key={course.id}
+              <motion.div
+                key={course._id}
                 className="course-card"
+                variants={cardVariants}
+                whileHover={{ y: -10, boxShadow: '0 10px 20px rgba(0,0,0,0.1)' }}
                 onClick={() => handleCourseClick(course)}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
@@ -70,11 +113,14 @@ const RecentCourses = () => {
               >
                 <div className="course-video-container">
                   <div className="video-wrapper">
-                    <iframe
-                      src={course.videoUrl}
-                      title={course.title}
-                      allowFullScreen
-                      className="video-iframe"
+                    <img
+                      src={course.image || '/images/sample.jpg'}
+                      alt={course.title}
+                      className="course-img"
+                      style={{
+                        position: 'absolute', top: 0, left: 0, width: 100 + '%', height: 100 + '%', objectFit: 'cover',
+                      }}
+                      onError={(e) => { e.target.src = '/images/sample.jpg'; }}
                     />
                   </div>
                   <div className="course-level">{course.level}</div>
@@ -98,9 +144,9 @@ const RecentCourses = () => {
                     View Details
                   </button>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
 
@@ -124,11 +170,13 @@ const RecentCourses = () => {
             <div className="course-details">
               <div className="course-header">
                 <div className="course-video">
-                  <iframe
-                    src={selectedCourse.videoUrl}
-                    title={selectedCourse.title}
-                    allowFullScreen
-                    className="video-iframe"
+                  <img
+                    src={selectedCourse.image || '/images/sample.jpg'}
+                    alt={selectedCourse.title}
+                    style={{
+                      width: 100 + '%', height: 100 + '%', objectFit: 'cover',
+                    }}
+                    onError={(e) => { e.target.src = '/images/sample.jpg'; }}
                   />
                 </div>
                 <div className="course-info">

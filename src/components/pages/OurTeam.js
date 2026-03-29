@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-// import Intro from './Intro';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import AboutNav from './AboutNav';
-import Ceo from '../../images/ceo.jpg';
 import '../styles/ourTeam.css';
 
 const OurTeam = () => {
@@ -15,144 +14,35 @@ const OurTeam = () => {
     { to: '#Our Instructors', label: 'Our Instructors', id: 'Our Instructors' },
   ];
 
-  // CEO Data
-  const ceo = {
-    id: 'ceo',
-    name: 'Junisar Bangali Esq.',
-    position: 'Chief Executive Officer',
-    image: Ceo,
-    biography: `Dr. Junisar Bangali Esq. is a visionary leader with over 20 years of experience in education and business management. 
-    He founded our institution with a mission to transform professional education through innovative teaching methods and 
-    industry-relevant curriculum. Under his leadership, the organization has grown from a small training center to a 
-    globally recognized educational institution serving thousands of students across multiple continents. Dr. Bangali holds 
-    numerous academic qualifications and has been recognized with several awards for excellence in educational leadership. 
-    He regularly speaks at international conferences on topics of educational innovation, leadership development, and 
-    corporate training strategies.`,
-  };
+  const [ceo, setCeo] = useState(null);
+  const [staff, setStaff] = useState([]);
+  const [mentors, setMentors] = useState([]);
+  const [instructors, setInstructors] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // Staff Data
-  const staff = [
-    {
-      id: 'staff-1',
-      name: 'Sarah Johnson',
-      position: 'Academic Director',
-      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=388&q=80',
-      biography: 'Sarah Johnson brings 15 years of academic administration experience to our team. She oversees curriculum development and ensures educational excellence across all programs.',
-    },
-    {
-      id: 'staff-2',
-      name: 'Michael Chen',
-      position: 'Operations Manager',
-      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=388&q=80',
-      biography: 'Michael Chen manages our daily operations with precision and efficiency. With a background in business management, he ensures smooth delivery of all educational services.',
-    },
-    {
-      id: 'staff-3',
-      name: 'Emily Rodriguez',
-      position: 'Student Services Coordinator',
-      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=388&q=80',
-      biography: 'Emily Rodriguez is dedicated to providing exceptional support to our students. She handles admissions, student records, and provides guidance throughout the learning journey.',
-    },
-    {
-      id: 'staff-4',
-      name: 'David Kim',
-      position: 'IT Director',
-      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=388&q=80',
-      biography: 'David Kim leads our technology infrastructure and online learning platforms. With expertise in educational technology, he ensures seamless digital learning experiences.',
-    },
-  ];
+  useEffect(() => {
+    const fetchTeam = async () => {
+      try {
+        const { data } = await axios.get('http://localhost:5000/api/content/our-team');
+        const allMembers = data.sections.map((s) => ({
+          id: s.key,
+          image: s.image,
+          ...JSON.parse(s.content),
+        }));
 
-  // Mentors Data
-  const mentors = [
-    {
-      id: 'mentor-1',
-      name: 'Robert Williams',
-      position: 'Leadership Mentor',
-      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=388&q=80',
-      biography: 'Robert Williams is a seasoned executive coach with 25+ years of corporate leadership experience. He mentors students in leadership development and strategic management.',
-    },
-    {
-      id: 'mentor-2',
-      name: 'Jennifer Martinez',
-      position: 'Career Development Mentor',
-      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=388&q=80',
-      biography: 'Jennifer Martinez specializes in career coaching and professional development. She helps students navigate their career paths and achieve their professional goals.',
-    },
-    {
-      id: 'mentor-3',
-      name: 'Thomas Brown',
-      position: 'Business Strategy Mentor',
-      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=388&q=80',
-      biography: 'Thomas Brown brings extensive consulting experience to mentor students in business strategy and organizational development. He has worked with Fortune 500 companies globally.',
-    },
-    {
-      id: 'mentor-4',
-      name: 'Amanda Foster',
-      position: 'Communication Mentor',
-      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=388&q=80',
-      biography: 'Amanda Foster is an expert in corporate communication and public speaking. She helps students develop essential communication skills for professional success.',
-    },
-    {
-      id: 'mentor-5',
-      name: 'Christopher Lee',
-      position: 'Project Management Mentor',
-      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=388&q=80',
-      biography: 'Christopher Lee is a certified PMP with 20 years of project management experience. He mentors students in project planning, execution, and team leadership.',
-    },
-    {
-      id: 'mentor-6',
-      name: 'Michelle Davis',
-      position: 'Marketing Mentor',
-      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=388&q=80',
-      biography: 'Michelle Davis is a digital marketing expert who has led successful campaigns for global brands. She mentors students in marketing strategy and digital transformation.',
-    },
-    {
-      id: 'mentor-7',
-      name: 'Daniel Wilson',
-      position: 'Finance Mentor',
-      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=388&q=80',
-      biography: 'Daniel Wilson is a financial analyst and investment advisor with expertise in corporate finance and financial planning. He guides students in financial management.',
-    },
-    {
-      id: 'mentor-8',
-      name: 'Sophia Taylor',
-      position: 'HR Mentor',
-      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=388&q=80',
-      biography: 'Sophia Taylor specializes in human resources and organizational development. She mentors students in talent management and workplace culture.',
-    },
-  ];
-
-  // Instructors Data
-  const instructors = [
-    {
-      id: 'instructor-1',
-      name: 'Dr. Patricia Chen',
-      position: 'Leadership Instructor',
-      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=388&q=80',
-      biography: 'Dr. Patricia Chen holds a PhD in Organizational Psychology and has been teaching leadership courses for over 15 years. She brings real-world corporate experience to the classroom.',
-    },
-    {
-      id: 'instructor-2',
-      name: 'Prof. Michael Roberts',
-      position: 'Communication Instructor',
-      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=388&q=80',
-      biography: 'Prof. Michael Roberts is an expert in business communication with extensive experience in corporate training. He specializes in presentation skills and interpersonal communication.',
-    },
-    {
-      id: 'instructor-3',
-      name: 'Dr. Sarah Thompson',
-      position: 'Project Management Instructor',
-      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=388&q=80',
-      biography: 'Dr. Sarah Thompson is a certified PMP with a background in engineering and project management. She has managed multi-million dollar projects across various industries.',
-    },
-    {
-      id: 'instructor-4',
-      name: 'Prof. David Kim',
-      position: 'Marketing Instructor',
-      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=388&q=80',
-      biography: 'Prof. David Kim is a marketing professional with experience in digital marketing and brand management. He has worked with leading global brands on successful campaigns.',
-    },
-  ];
+        setCeo(allMembers.find((m) => m.id === 'ceo'));
+        setStaff(allMembers.filter((m) => m.id.startsWith('staff')));
+        setMentors(allMembers.filter((m) => m.id.startsWith('mentor')));
+        setInstructors(allMembers.filter((m) => m.id.startsWith('instructor')));
+        setLoading(false);
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.error(err);
+        setLoading(false);
+      }
+    };
+    fetchTeam();
+  }, []);
 
   const handleViewBio = (person) => {
     setSelectedPerson(person);
@@ -162,12 +52,10 @@ const OurTeam = () => {
     setSelectedPerson(null);
   };
 
+  if (loading || !ceo) return null;
+
   return (
     <div className="our-team-page">
-      {/* CEO Section */}
-      {/* <Intro
-        heading="Our Team"
-      /> */}
       <AboutNav
         links={links}
       />
@@ -179,7 +67,7 @@ const OurTeam = () => {
             </div>
             <div className="ceo-info">
               <div className="ceo-biography">
-                <p>{ceo.biography}</p>
+                <p>{ceo.bio}</p>
                 <button
                   type="button"
                   className="read-more-btn"
@@ -303,7 +191,7 @@ const OurTeam = () => {
                 <h2>{selectedPerson.name}</h2>
                 <p className="bio-position">{selectedPerson.position}</p>
                 <div className="bio-biography">
-                  <p>{selectedPerson.biography}</p>
+                  <p>{selectedPerson.bio}</p>
                 </div>
               </div>
             </div>

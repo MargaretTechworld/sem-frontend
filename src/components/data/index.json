@@ -26,7 +26,7 @@
   "Testimonies": [
     {
       "id": "1",
-      "image":"./images/testifier/mag.jpg",
+      "image": "./images/testifier/mag.jpg",
       "alt": "mag",
       "name": "Margaret Kojo-Musa",
       "rating": 4,
@@ -34,7 +34,7 @@
     },
     {
       "id": "2",
-      "image":"./images/testifier/mag.jpg",
+      "image": "./images/testifier/mag.jpg",
       "alt": "mag",
       "name": "Margaret Kojo-Musa",
       "rating": 6,
@@ -42,7 +42,7 @@
     },
     {
       "id": "3",
-      "image":"./images/testifier/mag.jpg",
+      "image": "./images/testifier/mag.jpg",
       "alt": "mag",
       "name": "Margaret Kojo-Musa",
       "rating": 7,
@@ -50,7 +50,7 @@
     },
     {
       "id": "4",
-      "image":"./images/testifier/mag.jpg",
+      "image": "./images/testifier/mag.jpg",
       "alt": "mag",
       "name": "Margaret Kojo-Musa",
       "rating": 4,
@@ -185,7 +185,7 @@
       ]
     }
   ],
-"News": [
+  "News": [
     {
       "id": "1",
       "news-heading": "Classes Resume",
@@ -226,5 +226,5 @@
       "news-image": "./images/conference.jpg",
       "type": "News"
     }
-]
+  ]
 }

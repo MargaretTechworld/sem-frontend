@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   FaMapMarkerAlt, FaCity, FaEnvelope, FaPhone,
 } from 'react-icons/fa';
@@ -11,10 +12,10 @@ const Footer = () => (
         <h2 className="home-contact-heading">QUICK LINKS</h2>
         <div className="dash" />
         <div className="footer-links">
-          <p>About Us</p>
-          <p>News & Events</p>
-          <p>Admission</p>
-          <p>Contact</p>
+          <p><Link to="/about">About Us</Link></p>
+          <p><Link to="/news-events">News & Events</Link></p>
+          <p><Link to="/admission">Admission</Link></p>
+          <p><Link to="/contact-us">Contact</Link></p>
         </div>
       </div>
       <div className="contact-map">

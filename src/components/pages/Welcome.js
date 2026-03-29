@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/welcome.css';
 
+import { motion, AnimatePresence } from 'framer-motion';
+
 const Welcome = () => {
   const [textIndex, setTextIndex] = useState(0);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -60,10 +62,27 @@ const Welcome = () => {
 
       <div className="welcome-overlay" />
       <div className="welcome-text">
-        <h2 className="welcome-heading">
-          {texts[textIndex]}
-        </h2>
-        <button type="button" className="welcome-btn" onClick={() => {}}>Apply Now</button>
+        <AnimatePresence mode="wait">
+          <motion.h2
+            key={textIndex}
+            className="welcome-heading"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.5 }}
+          >
+            {texts[textIndex]}
+          </motion.h2>
+        </AnimatePresence>
+        <motion.button
+          type="button"
+          className="welcome-btn"
+          onClick={() => { }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          Apply Now
+        </motion.button>
       </div>
     </div>
   );
