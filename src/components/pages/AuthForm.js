@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { FaUser, FaEnvelope, FaLock } from 'react-icons/fa';
+import { API_URL } from '../../apiConfig';
 import '../../styles/admin.css';
 
 const AuthForm = ({ onSuccess }) => {
@@ -24,10 +25,12 @@ const AuthForm = ({ onSuccess }) => {
 
     try {
       setLoading(true);
-      const url = isLogin ? 'http://localhost:5000/api/users/login' : 'http://localhost:5000/api/users';
-      const { data } = await axios.post(url, { name, email, password });
+      const formData = isLogin ? { email, password } : { name, email, password };
+      const { data } = await axios.post(`${API_URL}/users/${isLogin ? 'login' : ''}`, formData);
 
-      localStorage.setItem('studentInfo', JSON.stringify(data));
+      localStorage.setItem('userInfo', JSON.stringify(data));
+      // Notify navigation and other components
+      window.dispatchEvent(new Event('authChange'));
       onSuccess(data);
       setLoading(false);
     } catch (err) {

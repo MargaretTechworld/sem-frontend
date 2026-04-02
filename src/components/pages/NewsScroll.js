@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
+import { API_URL } from '../../apiConfig';
 import '../styles/newsScroll.css';
 
 const NewsScroll = () => {
@@ -9,7 +10,7 @@ const NewsScroll = () => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/api/content/news');
+        const { data } = await axios.get(`${API_URL}/content/news`);
         const formattedNews = data.sections.map((section) => {
           try {
             return { id: section.key, ...JSON.parse(section.content) };

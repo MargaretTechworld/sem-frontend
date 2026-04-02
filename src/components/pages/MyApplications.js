@@ -5,6 +5,7 @@ import axios from 'axios';
 import {
   FaFileAlt, FaCheckCircle, FaHourglassHalf, FaTimesCircle, FaCreditCard,
 } from 'react-icons/fa';
+import { API_URL } from '../../apiConfig';
 import '../../styles/admin.css';
 
 const MyApplications = () => {
@@ -26,7 +27,7 @@ const MyApplications = () => {
 
   useEffect(() => {
     const fetchMyApplications = async () => {
-      const userInfo = JSON.parse(localStorage.getItem('studentInfo') || localStorage.getItem('userInfo'));
+      const userInfo = JSON.parse(localStorage.getItem('userInfo'));
       if (!userInfo) {
         navigate('/admission');
         return;
@@ -35,7 +36,7 @@ const MyApplications = () => {
         const config = {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         };
-        const { data } = await axios.get('http://localhost:5000/api/applications/mine', config);
+        const { data } = await axios.get(`${API_URL}/applications/mine`, config);
         setApplications(data);
         setLoading(false);
       } catch (err) {
@@ -47,7 +48,7 @@ const MyApplications = () => {
   }, [navigate]);
 
   const handlePay = (app) => {
-    const student = JSON.parse(localStorage.getItem('studentInfo') || localStorage.getItem('userInfo'));
+    const student = JSON.parse(localStorage.getItem('userInfo'));
     navigate('/checkout', { state: { course: app.course, student, applicationId: app._id } });
   };
 
@@ -202,4 +203,3 @@ const MyApplications = () => {
 };
 
 export default MyApplications;
-

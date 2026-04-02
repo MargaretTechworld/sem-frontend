@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
+import { API_URL } from '../../apiConfig';
 import '../styles/loginModal.css';
 
 const LoginModal = ({ isOpen, onClose }) => {
   const [isLogin, setIsLogin] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const [formData, setFormData] = useState({
+    name: '',
     email: '',
     password: '',
     rememberMe: false,
@@ -18,10 +23,30 @@ const LoginModal = ({ isOpen, onClose }) => {
     }));
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    // Removed console.log for ESLint compliance
-    onClose();
+    setLoading(true);
+    setError('');
+
+    try {
+      const endpoint = isLogin ? `${API_URL}/users/login` : `${API_URL}/users`;
+      const payload = isLogin
+        ? { email: formData.email, password: formData.password }
+        : { name: formData.name, email: formData.email, password: formData.password };
+
+      const { data } = await axios.post(endpoint, payload);
+
+      localStorage.setItem('userInfo', JSON.stringify(data));
+      setLoading(false);
+      
+      // Dispatch custom event to notify Navigation component
+      window.dispatchEvent(new Event('authChange'));
+      
+      onClose();
+    } catch (err) {
+      setError(err.response?.data?.message || 'Authentication failed');
+      setLoading(false);
+    }
   };
 
   const switchMode = () => {
@@ -71,7 +96,25 @@ const LoginModal = ({ isOpen, onClose }) => {
               </p>
 
               {/* eslint-disable jsx-a11y/label-has-associated-control */}
+              {error && <div style={{ color: '#ef4444', marginBottom: '1rem', fontSize: '0.9rem' }}>{error}</div>}
               <form onSubmit={handleFormSubmit}>
+                {!isLogin && (
+                  <div className="form-group">
+                    <label htmlFor="login-name" className="form-label">
+                      Full Name
+                    </label>
+                    <input
+                      type="text"
+                      id="login-name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className="form-input"
+                      placeholder="Enter your name"
+                      required
+                    />
+                  </div>
+                )}
                 <div className="form-group">
                   <label htmlFor="login-email" className="form-label">
                     Email Address
@@ -124,8 +167,8 @@ const LoginModal = ({ isOpen, onClose }) => {
                   </div>
                 )}
 
-                <button type="submit" className="login-btn">
-                  {isLogin ? 'Sign In' : 'Register'}
+                <button type="submit" className="login-btn" disabled={loading}>
+                  {loading ? 'Processing...' : (isLogin ? 'Sign In' : 'Register')}
                 </button>
               </form>
 

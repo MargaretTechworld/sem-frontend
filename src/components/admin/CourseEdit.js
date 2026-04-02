@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL, getImgUrl } from '../../apiConfig';
 import '../../styles/admin.css';
 
 const CourseEdit = () => {
@@ -23,11 +24,10 @@ const CourseEdit = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
 
-  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+  const adminInfo = JSON.parse(localStorage.getItem('adminInfo'));
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('userInfo'));
-    if (!user || !user.isAdmin) {
+    if (!adminInfo || !adminInfo.isAdmin) {
       navigate('/admin/login');
       return;
     }
@@ -35,7 +35,7 @@ const CourseEdit = () => {
     const fetchCourse = async () => {
       try {
         setLoading(true);
-        const { data } = await axios.get(`http://localhost:5000/api/courses/${id}`);
+        const { data } = await axios.get(`${API_URL}/courses/${id}`);
         if (data) {
           setTitle(data.title);
           setPrice(data.price);
@@ -46,7 +46,7 @@ const CourseEdit = () => {
           setMode(data.mode);
           setZoomLink(data.zoomLink || '');
           setLocation(data.location || '');
-          setVideoUrl(data.videoUrl || '');
+          // setVideoUrl(data.videoUrl || '');
         }
         setLoading(false);
       } catch (err) {
@@ -61,35 +61,37 @@ const CourseEdit = () => {
       fetchCourse();
     }
   }, [id, navigate]);
- 
+
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
- 
+
     if (file.size > 5 * 1024 * 1024) {
       setError('File is too large. Maximum size is 5MB.');
       return;
     }
- 
+
     const formData = new FormData();
     formData.append('image', file);
     setUploading(true);
- 
+
     try {
       const config = {
         headers: {
           'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${userInfo.token}`,
+          Authorization: `Bearer ${adminInfo.token}`,
         },
       };
- 
-      const { data } = await axios.post('http://localhost:5000/api/upload', formData, config);
-      setImage(`http://localhost:5000${data}`);
+
+      const { data } = await axios.post(`${API_URL}/upload`, formData, config);
+      setImage(data);
       setUploading(false);
       setError('');
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.error(err);
-      setError('File upload failed. Ensure it is an image under 5MB.');
+      const msg = err.response?.data?.message || err.message || 'File upload failed.';
+      setError(`Upload failed: ${msg}`);
       setUploading(false);
     }
   };
@@ -100,12 +102,12 @@ const CourseEdit = () => {
       const config = {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${userInfo.token}`,
+          Authorization: `Bearer ${adminInfo.token}`,
         },
       };
 
       await axios.put(
-        `http://localhost:5000/api/courses/${id}`,
+        `${API_URL}/courses/${id}`,
         {
           title,
           price,
@@ -193,7 +195,13 @@ const CourseEdit = () => {
               </div>
               {image && (
                 <div style={{ marginTop: '1rem' }}>
-                  <img src={image} alt="Preview" style={{ width: '100%', height: '150px', objectFit: 'cover', borderRadius: '8px' }} />
+                  <img
+                    src={getImgUrl(image)}
+                    alt="Preview"
+                    style={{
+                      width: '100%', height: '150px', objectFit: 'cover', borderRadius: '8px',
+                    }}
+                  />
                 </div>
               )}
             </div>
@@ -239,4 +247,3 @@ const CourseEdit = () => {
 };
 
 export default CourseEdit;
-

@@ -3,6 +3,7 @@ import axios from 'axios';
 import {
   FaPlus,
 } from 'react-icons/fa';
+import { API_URL } from '../../apiConfig';
 import '../styles/schoolCalendar.css';
 
 const SchoolCalendar = () => {
@@ -16,7 +17,7 @@ const SchoolCalendar = () => {
   useEffect(() => {
     const fetchFaq = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/api/content/faq');
+        const { data } = await axios.get(`${API_URL}/content/faq`);
         const formatted = data.sections.map((s) => ({
           id: s.key,
           label: s.key.replace(/_/g, ' '),

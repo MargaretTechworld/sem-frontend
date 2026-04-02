@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import { FaRegCalendarAlt, FaChevronRight } from 'react-icons/fa';
+import { API_URL, getImgUrl } from '../../apiConfig';
 import SchoolCalendar from './SchoolCalendar';
 import '../../styles/admin.css';
 import '../../styles/news_redesign.css'; // Reusing some base utility styles if needed, but primarily custom CSS likely needed
@@ -14,7 +15,7 @@ const NewsEvents = () => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/api/content/news');
+        const { data } = await axios.get(`${API_URL}/content/news-events`);
         const formattedNews = data.sections.map((section) => {
           try {
             return {
@@ -91,7 +92,7 @@ const NewsEvents = () => {
             >
               <div style={{ flex: '0 0 350px', position: 'relative' }}>
                 <img
-                  src={item.image}
+                  src={getImgUrl(item.image)}
                   alt={item.title}
                   style={{
                     width: '100%', height: '100%', objectFit: 'cover', minHeight: '250px',

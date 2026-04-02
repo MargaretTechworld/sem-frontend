@@ -6,6 +6,7 @@ import axios from 'axios';
 import {
   FaPlus, FaTrash, FaUserTie, FaUserGraduate, FaChalkboardTeacher,
 } from 'react-icons/fa';
+import { API_URL, getImgUrl } from '../../apiConfig';
 import '../../styles/admin.css';
 
 const ContentManager = () => {
@@ -25,7 +26,7 @@ const ContentManager = () => {
   const fetchContent = async (page) => {
     try {
       setLoading(true);
-      const { data } = await axios.get(`http://localhost:5000/api/content/${page}`);
+      const { data } = await axios.get(`${API_URL}/content/${page}`);
       setSections(data.sections || []);
       setLoading(false);
     } catch (err) {
@@ -35,7 +36,7 @@ const ContentManager = () => {
   };
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('userInfo'));
+    const user = JSON.parse(localStorage.getItem('adminInfo'));
     if (!user || !user.isAdmin) {
       navigate('/admin/login');
     } else {
@@ -100,16 +101,16 @@ const ContentManager = () => {
     setUploading(true);
 
     try {
-      const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+      const adminInfo = JSON.parse(localStorage.getItem('adminInfo'));
       const config = {
         headers: {
           'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${userInfo.token}`,
+          Authorization: `Bearer ${adminInfo.token}`,
         },
       };
 
-      const { data } = await axios.post('http://localhost:5000/api/upload', formData, config);
-      handleSectionChange(index, 'image', `http://localhost:5000${data}`);
+      const { data } = await axios.post(`${API_URL}/upload`, formData, config);
+      handleSectionChange(index, 'image', data);
       setUploading(false);
     } catch (err) {
       setError('File upload failed. Please try again.');
@@ -119,17 +120,17 @@ const ContentManager = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    const adminInfo = JSON.parse(localStorage.getItem('adminInfo'));
     try {
       const config = {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${userInfo.token}`,
+          Authorization: `Bearer ${adminInfo.token}`,
         },
       };
 
       await axios.post(
-        'http://localhost:5000/api/content',
+        `${API_URL}/content`,
         { page: selectedPage, sections },
         config,
       );
@@ -261,6 +262,17 @@ const ContentManager = () => {
               {uploading ? 'Uploading...' : 'Upload Image'}
             </button>
           </div>
+          {section.image && (
+            <div style={{ marginTop: '1rem' }}>
+              <img
+                src={getImgUrl(section.image)}
+                alt="Preview"
+                style={{
+                  width: '100%', height: '100px', objectFit: 'cover', borderRadius: '8px', border: '1px solid #e2e8f0',
+                }}
+              />
+            </div>
+          )}
         </div>
       </div>
     );

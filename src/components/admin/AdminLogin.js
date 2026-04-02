@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL } from '../../apiConfig';
 import '../../styles/admin.css';
 
 const AdminLogin = () => {
@@ -20,12 +21,12 @@ const AdminLogin = () => {
       };
 
       const { data } = await axios.post(
-        'http://localhost:5000/api/users/login',
+        `${API_URL}/users/login`,
         { email, password },
         config,
       );
 
-      localStorage.setItem('userInfo', JSON.stringify(data));
+      localStorage.setItem('adminInfo', JSON.stringify(data));
       navigate('/admin/dashboard');
     } catch (err) {
       setError(err.response && err.response.data.message

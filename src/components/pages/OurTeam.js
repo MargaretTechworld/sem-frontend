@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_URL, getImgUrl } from '../../apiConfig';
 import AboutNav from './AboutNav';
 import '../styles/ourTeam.css';
 
@@ -23,7 +24,7 @@ const OurTeam = () => {
   useEffect(() => {
     const fetchTeam = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/api/content/our-team');
+        const { data } = await axios.get(`${API_URL}/content/our-team`);
         const allMembers = data.sections.map((s) => ({
           id: s.key,
           image: s.image,
@@ -63,7 +64,7 @@ const OurTeam = () => {
         <div className="container">
           <div className="ceo-content">
             <div className="ceo-image">
-              <img src={ceo.image} alt={ceo.name} />
+              <img src={getImgUrl(ceo.image)} alt={ceo.name} />
             </div>
             <div className="ceo-info">
               <div className="ceo-biography">
@@ -92,7 +93,7 @@ const OurTeam = () => {
             {staff.map((member) => (
               <div key={member.id} className="staff-card">
                 <div className="staff-image">
-                  <img src={member.image} alt={member.name} />
+                  <img src={getImgUrl(member.image)} alt={member.name} />
                 </div>
                 <h3>{member.name}</h3>
                 <p className="staff-position">{member.position}</p>
@@ -117,7 +118,7 @@ const OurTeam = () => {
             {mentors.map((mentor) => (
               <div key={mentor.id} className="mentor-card">
                 <div className="mentor-image">
-                  <img src={mentor.image} alt={mentor.name} />
+                  <img src={getImgUrl(mentor.image)} alt={mentor.name} />
                 </div>
                 <h3>{mentor.name}</h3>
                 <p className="mentor-position">{mentor.position}</p>
@@ -142,7 +143,7 @@ const OurTeam = () => {
             {instructors.map((instructor) => (
               <div key={instructor.id} className="instructor-card">
                 <div className="instructor-image">
-                  <img src={instructor.image} alt={instructor.name} />
+                  <img src={getImgUrl(instructor.image)} alt={instructor.name} />
                 </div>
                 <h3>{instructor.name}</h3>
                 <p className="instructor-position">{instructor.position}</p>
@@ -185,7 +186,7 @@ const OurTeam = () => {
             </button>
             <div className="bio-content">
               <div className="bio-image">
-                <img src={selectedPerson.image} alt={selectedPerson.name} />
+                <img src={getImgUrl(selectedPerson.image)} alt={selectedPerson.name} />
               </div>
               <div className="bio-info">
                 <h2>{selectedPerson.name}</h2>
@@ -225,7 +226,7 @@ const OurTeam = () => {
             </button>
             <div className="ceo-modal-header">
               <div className="ceo-modal-image">
-                <img src={ceo.image} alt={ceo.name} />
+                <img src={getImgUrl(ceo.image)} alt={ceo.name} />
               </div>
               <div className="ceo-modal-title">
                 <h1>{ceo.name}</h1>

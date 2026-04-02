@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FaEnvelope, FaHistory } from 'react-icons/fa';
+import { API_URL, getImgUrl } from '../../apiConfig';
 import '../../styles/admin.css';
 
 const OrderList = () => {
@@ -13,8 +14,8 @@ const OrderList = () => {
 
   useEffect(() => {
     const fetchOrders = async () => {
-      const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-      if (!userInfo || !userInfo.isAdmin) {
+      const adminInfo = JSON.parse(localStorage.getItem('adminInfo'));
+      if (!adminInfo || !adminInfo.isAdmin) {
         navigate('/admin/login');
         return;
       }
@@ -22,10 +23,10 @@ const OrderList = () => {
       try {
         const config = {
           headers: {
-            Authorization: `Bearer ${userInfo.token}`,
+            Authorization: `Bearer ${adminInfo.token}`,
           },
         };
-        const { data } = await axios.get('http://localhost:5000/api/orders', config);
+        const { data } = await axios.get(`${API_URL}/orders`, config);
         setOrders(data);
         setLoading(false);
       } catch (err) {
@@ -87,11 +88,19 @@ const OrderList = () => {
                     <div style={{ fontWeight: '700', color: '#1e293b' }}>{order.user?.name || 'Guest'}</div>
                     <div style={{ fontSize: '0.8rem', color: '#64748b' }}>{order.user?.email || order.paymentResult?.email_address}</div>
                   </td>
-                  <td>
-                    <div style={{ fontWeight: '600' }}>{order.orderItems[0]?.title}</div>
-                    <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
-                      ID:
-                      {order.orderItems[0]?.course}
+                  <td style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                    <img 
+                      src={getImgUrl(order.orderItems[0]?.image)} 
+                      alt="Course" 
+                      style={{ width: '45px', height: '45px', borderRadius: '8px', objectFit: 'cover', background: '#f8fafc' }} 
+                      onError={(e) => e.target.src = '/images/default-course.jpg'}
+                    />
+                    <div>
+                      <div style={{ fontWeight: '600' }}>{order.orderItems[0]?.title}</div>
+                      <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
+                        ID:
+                        {order.orderItems[0]?.course}
+                      </div>
                     </div>
                   </td>
                   <td>

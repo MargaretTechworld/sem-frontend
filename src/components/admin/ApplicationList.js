@@ -4,6 +4,7 @@ import axios from 'axios';
 import {
   FaEye, FaCheck, FaTimes, FaFileDownload,
 } from 'react-icons/fa';
+import { API_URL, getImgUrl } from '../../apiConfig';
 import '../../styles/admin.css';
 
 const ApplicationList = () => {
@@ -16,9 +17,9 @@ const ApplicationList = () => {
 
   const fetchApplications = async () => {
     try {
-      const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-      const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
-      const { data } = await axios.get('http://localhost:5000/api/applications', config);
+      const adminInfo = JSON.parse(localStorage.getItem('adminInfo'));
+      const config = { headers: { Authorization: `Bearer ${adminInfo.token}` } };
+      const { data } = await axios.get(`${API_URL}/applications`, config);
       setApplications(data);
       setLoading(false);
     } catch (err) {
@@ -34,9 +35,9 @@ const ApplicationList = () => {
   const handleUpdateStatus = async (status) => {
     setUpdateLoading(true);
     try {
-      const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-      const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
-      await axios.put(`http://localhost:5000/api/applications/${selectedApp._id}`, { status, remarks }, config);
+      const adminInfo = JSON.parse(localStorage.getItem('adminInfo'));
+      const config = { headers: { Authorization: `Bearer ${adminInfo.token}` } };
+      await axios.put(`${API_URL}/applications/${selectedApp._id}`, { status, remarks }, config);
       setSelectedApp(null);
       setRemarks('');
       fetchApplications();
@@ -197,30 +198,34 @@ const ApplicationList = () => {
               </p>
             </div>
 
-            <div style={{ marginBottom: '2rem' }}>
-              <h4 style={{ color: '#3b82f6', marginBottom: '0.5rem' }}>Uploaded Documents</h4>
-              <div style={{ display: 'flex', gap: '1rem' }}>
-                {selectedApp.documents?.idCard && (
-                <a href={selectedApp.documents.idCard} target="_blank" rel="noreferrer" className="btn-secondary btn-sm">
-                  <FaFileDownload />
-                  {' '}
-                  ID Card
-                </a>
-                )}
-                {selectedApp.documents?.academicCertificates && (
-                <a href={selectedApp.documents.academicCertificates} target="_blank" rel="noreferrer" className="btn-secondary btn-sm">
-                  <FaFileDownload />
-                  {' '}
-                  Certificates
-                </a>
-                )}
-                {selectedApp.documents?.resume && (
-                <a href={selectedApp.documents.resume} target="_blank" rel="noreferrer" className="btn-secondary btn-sm">
-                  <FaFileDownload />
-                  {' '}
-                  Resume
-                </a>
-                )}
+            <div style={{ marginBottom: '2rem', padding: '1.5rem', background: '#f1f5f9', borderRadius: '12px' }}>
+              <h4 style={{ color: '#0f172a', marginBottom: '1rem' }}>Uploaded Documents</h4>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '1rem' }}>
+                {selectedApp.documents && Object.entries(selectedApp.documents)
+                  .filter(([_, value]) => value)
+                  .map(([key, value]) => {
+                    const isPdf = typeof value === 'string' && value.toLowerCase().endsWith('.pdf');
+                    return (
+                      <div key={key} style={{ background: '#fff', padding: '0.75rem', borderRadius: '8px', border: '1px solid #e2e8f0', textAlign: 'center' }}>
+                        <div style={{ fontSize: '0.65rem', fontWeight: 'bold', color: '#64748b', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
+                          {key.replace(/([A-Z])/g, ' $1')}
+                        </div>
+                        {isPdf ? (
+                          <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>📄</div>
+                        ) : (
+                          <img src={getImgUrl(value)} alt={key} style={{ width: '100%', height: '60px', objectFit: 'cover', borderRadius: '4px', marginBottom: '0.5rem' }} />
+                        )}
+                        <a 
+                          href={getImgUrl(value)} 
+                          target="_blank" 
+                          rel="noreferrer" 
+                          style={{ fontSize: '0.75rem', color: '#3b82f6', textDecoration: 'none', fontWeight: '800' }}
+                        >
+                          {isPdf ? 'OPEN PDF' : 'VIEW IMAGE'}
+                        </a>
+                      </div>
+                    );
+                  })}
               </div>
             </div>
 

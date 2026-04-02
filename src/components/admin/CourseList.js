@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL } from '../../apiConfig';
 import '../../styles/admin.css';
 
 const CourseList = () => {
@@ -20,12 +21,12 @@ const CourseList = () => {
     return undefined;
   }, [successMsg]);
 
-  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+  const adminInfo = JSON.parse(localStorage.getItem('adminInfo'));
 
   const fetchCourses = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get('http://localhost:5000/api/courses');
+      const { data } = await axios.get(`${API_URL}/courses`);
       setCourses(data);
       setLoading(false);
     } catch (err) {
@@ -35,8 +36,7 @@ const CourseList = () => {
   };
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('userInfo'));
-    if (!user || !user.isAdmin) {
+    if (!adminInfo || !adminInfo.isAdmin) {
       navigate('/admin/login');
     } else {
       fetchCourses();
@@ -50,10 +50,11 @@ const CourseList = () => {
       try {
         const config = {
           headers: {
-            Authorization: `Bearer ${userInfo.token}`,
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${adminInfo.token}`,
           },
         };
-        await axios.delete(`http://localhost:5000/api/courses/${id}`, config);
+        await axios.delete(`${API_URL}/courses/${id}`, config);
         setCourses((prevCourses) => prevCourses.filter((c) => c._id !== id));
         setSuccessMsg('Course deleted successfully');
       } catch (err) {

@@ -11,7 +11,7 @@ const Admission = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const course = location.state?.course || null;
-  const [student, setStudent] = useState(JSON.parse(localStorage.getItem('studentInfo')));
+  const [student, setStudent] = useState(JSON.parse(localStorage.getItem('userInfo')));
   const [step, setStep] = useState(1);
 
   useEffect(() => {
@@ -26,6 +26,14 @@ const Admission = () => {
       setStep(2); // Jump to review if already logged in
     }
   }, [student]);
+
+  useEffect(() => {
+    const handleAuthChange = () => {
+      setStudent(JSON.parse(localStorage.getItem('userInfo')));
+    };
+    window.addEventListener('authChange', handleAuthChange);
+    return () => window.removeEventListener('authChange', handleAuthChange);
+  }, []);
 
   const handleAuthSuccess = (userData) => {
     setStudent(userData);
@@ -150,7 +158,7 @@ const Admission = () => {
               >
                 <button
                   type="button"
-                  onClick={() => { localStorage.removeItem('studentInfo'); setStudent(null); setStep(1); }}
+                  onClick={() => { localStorage.removeItem('userInfo'); setStudent(null); setStep(1); window.dispatchEvent(new Event('authChange')); }}
                   style={{
                     background: 'none', border: 'none', color: '#dc2626', cursor: 'pointer',
                   }}

@@ -7,24 +7,27 @@ import '../styles/Navigation.css';
 const Navigation = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [userInfo, setUserInfo] = useState(JSON.parse(localStorage.getItem('userInfo')));
 
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
+  React.useEffect(() => {
+    const handleAuthChange = () => {
+      setUserInfo(JSON.parse(localStorage.getItem('userInfo')));
+    };
+    window.addEventListener('authChange', handleAuthChange);
+    return () => window.removeEventListener('authChange', handleAuthChange);
+  }, []);
+
+  const toggleMenu = () => setMenuOpen(!menuOpen);
+
+  const logoutHandler = () => {
+    localStorage.removeItem('userInfo');
+    setUserInfo(null);
+    setMenuOpen(false);
+    window.location.href = '/';
   };
 
-  const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
-      toggleMenu();
-    }
-  };
-
-  const openLoginModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeLoginModal = () => {
-    setIsModalOpen(false);
-  };
+  const openLoginModal = () => setIsModalOpen(true);
+  const closeLoginModal = () => setIsModalOpen(false);
 
   return (
     <div>
@@ -49,7 +52,7 @@ const Navigation = () => {
             role="button"
             tabIndex={0}
             onClick={toggleMenu}
-            onKeyDown={handleKeyDown}
+            onKeyDown={(e) => e.key === 'Enter' && toggleMenu()}
             aria-label="Toggle Menu"
           >
             <span />
@@ -60,7 +63,7 @@ const Navigation = () => {
             <div
               className="close"
               onClick={toggleMenu}
-              onKeyDown={handleKeyDown}
+              onKeyDown={(e) => e.key === 'Enter' && toggleMenu()}
               role="button"
               tabIndex={0}
             >
@@ -101,27 +104,48 @@ const Navigation = () => {
                 News &amp; Events
               </NavLink>
             </li>
-            <li>
-              <NavLink className="list" to="/my-applications" aria-label="My Applications" onClick={() => setMenuOpen(false)}>
-                My Applications
-              </NavLink>
-            </li>
+            {userInfo && (
+              <li>
+                <NavLink 
+                  className="list" 
+                  to="/portal" 
+                  aria-label="My Portal" 
+                  onClick={() => setMenuOpen(false)}
+                  style={{ color: '#3b82f6', fontWeight: '800' }}
+                >
+                  My Portal
+                </NavLink>
+              </li>
+            )}
             <li>
               <NavLink className="list" to="/contact-us" aria-label="Contact Us" onClick={() => setMenuOpen(false)}>
                 Contact Us
               </NavLink>
             </li>
             <li>
-              <button
-                type="button"
-                className="login"
-                onClick={() => { setMenuOpen(false); openLoginModal(); }}
-                style={{
-                  background: 'none', border: 'none', cursor: 'pointer', font: 'inherit',
-                }}
-              >
-                Login
-              </button>
+              {userInfo ? (
+                <button
+                  type="button"
+                  className="login"
+                  onClick={logoutHandler}
+                  style={{
+                    background: '#ef4444', color: '#fff', border: 'none', cursor: 'pointer', padding: '0.6rem 1.2rem', borderRadius: '8px', fontWeight: '700',
+                  }}
+                >
+                  Logout
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className="login"
+                  onClick={() => { setMenuOpen(false); openLoginModal(); }}
+                  style={{
+                    background: '#3b82f6', color: '#fff', border: 'none', cursor: 'pointer', padding: '0.6rem 1.2rem', borderRadius: '8px', fontWeight: '700',
+                  }}
+                >
+                  Login
+                </button>
+              )}
             </li>
           </ul>
 

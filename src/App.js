@@ -25,6 +25,7 @@ import ContactStudent from './components/admin/ContactStudent';
 import Checkout from './components/pages/Checkout';
 import CourseApplicationForm from './components/pages/CourseApplicationForm';
 import MyApplications from './components/pages/MyApplications';
+import StudentPortal from './components/pages/StudentPortal';
 
 const PublicLayout = () => (
   <div className="app-container">
@@ -33,6 +34,15 @@ const PublicLayout = () => (
       <Outlet />
     </div>
     <Footer />
+  </div>
+);
+
+const StudentLayout = () => (
+  <div className="app-container">
+    <Navigation />
+    <div className="content-container">
+      <Outlet />
+    </div>
   </div>
 );
 
@@ -52,7 +62,10 @@ function App() {
         <Route path="orders/:id/contact" element={<ContactStudent />} />
       </Route>
 
-      {/* Public Routes */}
+      <Route element={<StudentLayout />}>
+        <Route path="/portal" element={<StudentPortal />} />
+      </Route>
+
       <Route element={<PublicLayout />}>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -61,7 +74,7 @@ function App() {
         <Route path="/news-events" element={<NewsEvents />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/application" element={<CourseApplicationForm />} />
-        <Route path="/my-applications" element={<MyApplications />} />
+        <Route path="/my-applications" element={<Navigate to="/portal" replace />} />
         <Route path="/all-courses" element={<AllCourses />} />
         <Route path="/our-team" element={<OurTeam />} />
         <Route path="/ceo-bio" element={<CeoBio />} />

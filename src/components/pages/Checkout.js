@@ -9,6 +9,7 @@ import {
 } from '@stripe/react-stripe-js';
 import axios from 'axios';
 import { FaLock, FaCheckCircle, FaExclamationTriangle } from 'react-icons/fa';
+import { API_URL } from '../../apiConfig';
 import '../../styles/admin.css';
 
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
@@ -40,7 +41,7 @@ const CheckoutForm = ({ course, student }) => {
         const { id } = paymentMethod;
 
         // 1. Create Payment Intent on Server
-        const { data } = await axios.post('http://localhost:5000/api/payment/create-payment-intent', {
+        const { data } = await axios.post(`${API_URL}/payment/create-payment-intent`, {
           items: [{ id: course._id, price: course.price }],
           email: student.email,
         });
@@ -82,7 +83,7 @@ const CheckoutForm = ({ course, student }) => {
             paidAt: new Date(),
           };
 
-          await axios.post('http://localhost:5000/api/orders', orderData, config);
+          await axios.post(`${API_URL}/orders`, orderData, config);
 
           setSucceeded(true);
           setProcessing(false);
@@ -200,7 +201,10 @@ const CheckoutForm = ({ course, student }) => {
 const Checkout = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { course, student } = location.state || {};
+  
+  // Use state if available, fallback to localStorage if refreshed
+  const course = location.state?.course || JSON.parse(localStorage.getItem('lastViewedCourse'));
+  const student = location.state?.student || JSON.parse(localStorage.getItem('userInfo'));
 
   if (!course || !student) {
     return (

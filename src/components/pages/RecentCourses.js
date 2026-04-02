@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL, getImgUrl } from '../../apiConfig';
 import '../styles/recentCourses.css';
 
 // ResizeObserver error handling utility
@@ -27,21 +28,40 @@ const RecentCourses = () => {
   const navigate = useNavigate();
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [courses, setCourses] = useState([]);
+  const [userApplications, setUserApplications] = useState([]);
+  const [userOrders, setUserOrders] = useState([]);
+  const [userInfo] = useState(JSON.parse(localStorage.getItem('userInfo')));
 
   useEffect(() => {
     handleResizeObserverError();
 
-    const fetchCourses = async () => {
+    const fetchData = async (info) => {
       try {
-        const { data } = await axios.get('http://localhost:5000/api/courses');
-        // Get first 6 courses
+        const { data } = await axios.get(`${API_URL}/courses`);
         setCourses(data.slice(0, 6));
+        
+        const currentInfo = info || JSON.parse(localStorage.getItem('userInfo'));
+        if (currentInfo) {
+          const config = { headers: { Authorization: `Bearer ${currentInfo.token}` } };
+          const [apps, orders] = await Promise.all([
+            axios.get(`${API_URL}/applications/mine`, config),
+            axios.get(`${API_URL}/orders/mine`, config),
+          ]);
+          setUserApplications(apps.data);
+          setUserOrders(orders.data);
+        }
       } catch (error) {
-        console.error('Error fetching courses:', error);
+        console.error('Error fetching data:', error);
       }
     };
 
-    fetchCourses();
+    fetchData();
+
+    const handleAuthChange = () => {
+      fetchData();
+    };
+    window.addEventListener('authChange', handleAuthChange);
+    return () => window.removeEventListener('authChange', handleAuthChange);
   }, []);
 
   const handleCourseClick = (course) => {
@@ -53,8 +73,29 @@ const RecentCourses = () => {
     setSelectedCourse(null);
   };
 
+  const getCourseStatus = (courseId) => {
+    const order = userOrders.find((o) => o.orderItems.some((item) => item.course === courseId));
+    if (order) return { label: 'Enrolled', action: 'portal', color: '#10b981' };
+
+    const app = userApplications.find((a) => a.course?._id === courseId || a.course === courseId);
+    if (app) {
+      if (app.status === 'Approved') return { label: 'Pay Now', action: 'checkout', color: '#3b82f6', app };
+      if (app.status === 'Pending') return { label: 'Pending', action: 'portal', color: '#f59e0b' };
+    }
+    return { label: 'Enroll Now', action: 'enroll', color: '#0f172a' };
+  };
+
   const handleEnroll = (course) => {
-    navigate('/admission', { state: { course } });
+    const status = getCourseStatus(course._id);
+    if (status.action === 'portal') {
+      navigate('/portal');
+    } else if (status.action === 'checkout') {
+      localStorage.setItem('lastViewedCourse', JSON.stringify(course));
+      navigate('/checkout', { state: { course, student: userInfo, applicationId: status.app?._id } });
+    } else {
+      localStorage.setItem('lastViewedCourse', JSON.stringify(course));
+      navigate('/admission', { state: { course } });
+    }
   };
 
   const containerVariants = {
@@ -114,11 +155,11 @@ const RecentCourses = () => {
                 <div className="course-video-container">
                   <div className="video-wrapper">
                     <img
-                      src={course.image || '/images/sample.jpg'}
+                      src={getImgUrl(course.image)}
                       alt={course.title}
                       className="course-img"
                       style={{
-                        position: 'absolute', top: 0, left: 0, width: 100 + '%', height: 100 + '%', objectFit: 'cover',
+                        position: 'absolute', top: 0, left: 0, width: `${100}%`, height: `${100}%`, objectFit: 'cover',
                       }}
                       onError={(e) => { e.target.src = '/images/sample.jpg'; }}
                     />
@@ -138,10 +179,15 @@ const RecentCourses = () => {
                     className="view-details-btn"
                     onClick={(e) => {
                       e.stopPropagation();
-                      handleCourseClick(course);
+                      handleEnroll(course);
+                    }}
+                    style={{ 
+                      background: getCourseStatus(course._id).action === 'enroll' ? '#3b82f6' : getCourseStatus(course._id).color, 
+                      color: 'white',
+                      borderColor: 'transparent'
                     }}
                   >
-                    View Details
+                    {getCourseStatus(course._id).label}
                   </button>
                 </div>
               </motion.div>
@@ -171,10 +217,10 @@ const RecentCourses = () => {
               <div className="course-header">
                 <div className="course-video">
                   <img
-                    src={selectedCourse.image || '/images/sample.jpg'}
+                    src={getImgUrl(selectedCourse.image)}
                     alt={selectedCourse.title}
                     style={{
-                      width: 100 + '%', height: 100 + '%', objectFit: 'cover',
+                      width: `${100}%`, height: `${100}%`, objectFit: 'cover',
                     }}
                     onError={(e) => { e.target.src = '/images/sample.jpg'; }}
                   />
@@ -233,8 +279,13 @@ const RecentCourses = () => {
                 </div>
 
                 <div className="course-actions">
-                  <button type="button" className="enroll-btn" onClick={() => handleEnroll(selectedCourse)}>
-                    Enroll Now
+                  <button 
+                    type="button" 
+                    className="enroll-btn" 
+                    onClick={() => handleEnroll(selectedCourse)}
+                    style={{ background: getCourseStatus(selectedCourse._id).color }}
+                  >
+                    {getCourseStatus(selectedCourse._id).label}
                   </button>
                   <button type="button" className="back-btn" onClick={handleCloseDetails}>
                     Back to Courses

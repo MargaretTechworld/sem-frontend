@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { FaPaperPlane, FaPaperclip, FaUserGraduate } from 'react-icons/fa';
+import { API_URL } from '../../apiConfig';
 import '../../styles/admin.css';
 
 const ContactStudent = () => {
@@ -16,12 +17,16 @@ const ContactStudent = () => {
 
   useEffect(() => {
     const fetchOrder = async () => {
-      const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+      const adminInfo = JSON.parse(localStorage.getItem('adminInfo'));
+      if (!adminInfo) {
+        navigate('/admin/login');
+        return;
+      }
       try {
         const config = {
-          headers: { Authorization: `Bearer ${userInfo.token}` },
+          headers: { Authorization: `Bearer ${adminInfo.token}` },
         };
-        const { data } = await axios.get(`http://localhost:5000/api/orders/${id}`, config);
+        const { data } = await axios.get(`${API_URL}/orders/${id}`, config);
         setOrder(data);
         setSubject(`Materials for ${data.orderItems[0].title}`);
         setMessage(`Hello ${data.user.name},\n\nThank you for enrolling in ${data.orderItems[0].title}. Please find the attached course materials below.\n\nBest regards,\nTovaah Consulting Team`);
@@ -38,15 +43,15 @@ const ContactStudent = () => {
     setError('');
 
     try {
-      const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+      const adminInfo = JSON.parse(localStorage.getItem('adminInfo'));
       const config = {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${userInfo.token}`,
+          Authorization: `Bearer ${adminInfo.token}`,
         },
       };
 
-      await axios.post('http://localhost:5000/api/orders/contact', {
+      await axios.post(`${API_URL}/orders/contact`, {
         email: order.user.email,
         subject,
         message: message.replace(/\n/g, '<br>'),

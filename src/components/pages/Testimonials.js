@@ -4,6 +4,7 @@ import Slider from 'react-slick';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { FaArrowRight, FaArrowLeft, FaStar } from 'react-icons/fa';
+import { API_URL, getImgUrl } from '../../apiConfig';
 import '../styles/testimonials.css';
 
 const Testimonials = () => {
@@ -59,7 +60,7 @@ const Testimonials = () => {
   useEffect(() => {
     const fetchTestimonies = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/api/content/testimonies');
+        const { data } = await axios.get(`${API_URL}/content/testimonies`);
         const formatted = data.sections.map((s) => ({
           id: s.key,
           image: s.image,
@@ -98,7 +99,7 @@ const Testimonials = () => {
           >
             {testimonies.map((item) => (
               <div key={item.id || item.key}>
-                <img className="testifier-img" src={item.image} alt={item.name} />
+                <img className="testifier-img" src={getImgUrl(item.image)} alt={item.name} />
                 <h2>{item.name}</h2>
                 <div className="stars">
                   {Array.from({ length: item.rating }, (_, index) => (

@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { API_URL, getImgUrl } from '../../apiConfig';
 import '../../styles/admin.css';
 
 const CourseCreate = () => {
@@ -21,42 +22,41 @@ const CourseCreate = () => {
 
   const [error, setError] = useState('');
 
-  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('userInfo'));
-    if (!user || !user.isAdmin) {
+    if (!adminInfo || !adminInfo.isAdmin) {
       navigate('/admin/login');
     }
-  }, [navigate]);
- 
+  }, [adminInfo, navigate]);
+
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
- 
+
     if (file.size > 5 * 1024 * 1024) {
       setError('File is too large. Maximum size is 5MB.');
       return;
     }
- 
+
     const formData = new FormData();
     formData.append('image', file);
     setUploading(true);
- 
+
     try {
       const config = {
         headers: {
           'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${userInfo.token}`,
+          Authorization: `Bearer ${adminInfo.token}`,
         },
       };
- 
-      const { data } = await axios.post('http://localhost:5000/api/upload', formData, config);
-      setImage(`http://localhost:5000${data}`);
+
+      const { data } = await axios.post(`${API_URL}/upload`, formData, config);
+      setImage(data);
       setUploading(false);
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.error(err);
-      setError('File upload failed. Ensure it is an image under 5MB.');
+      const msg = err.response?.data?.message || err.message || 'File upload failed.';
+      setError(`Upload failed: ${msg}`);
       setUploading(false);
     }
   };
@@ -64,15 +64,16 @@ const CourseCreate = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const config = {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${userInfo.token}`,
+          Authorization: `Bearer ${adminInfo.token}`,
         },
       };
 
       await axios.post(
-        'http://localhost:5000/api/courses',
+        `${API_URL}/courses`,
         {
           title,
           price: Number(price),
@@ -158,7 +159,13 @@ const CourseCreate = () => {
               </div>
               {image && (
                 <div style={{ marginTop: '1rem' }}>
-                  <img src={image} alt="Preview" style={{ width: '100%', height: '150px', objectFit: 'cover', borderRadius: '8px' }} />
+                  <img
+                    src={getImgUrl(image)}
+                    alt="Preview"
+                    style={{
+                      width: '100%', height: '150px', objectFit: 'cover', borderRadius: '8px',
+                    }}
+                  />
                 </div>
               )}
             </div>

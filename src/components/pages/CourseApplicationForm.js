@@ -3,12 +3,15 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FaFileAlt, FaUpload, FaSpinner } from 'react-icons/fa';
+import { API_URL, getImgUrl } from '../../apiConfig';
 import '../../styles/admin.css'; // Using admin styles for standard form layout
 
 const CourseApplicationForm = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { course, student } = location.state || {};
+  const stateData = location.state || {};
+  const [course] = useState(stateData.course || JSON.parse(localStorage.getItem('lastViewedCourse')));
+  const [student] = useState(stateData.student || JSON.parse(localStorage.getItem('userInfo')));
 
   const [formData, setFormData] = useState({
     // Section 1
@@ -62,6 +65,63 @@ const CourseApplicationForm = () => {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
 
+  React.useEffect(() => {
+    const fetchLatestApp = async () => {
+      try {
+        const config = {
+          headers: {
+            Authorization: `Bearer ${student.token}`,
+          },
+        };
+        const { data } = await axios.get(`${API_URL}/applications/mine/latest`, config);
+        
+        if (data && data.personalInfo) {
+          setFormData(prev => ({
+            ...prev,
+            // Section 1
+            fullName: data.personalInfo.fullName || prev.fullName,
+            gender: data.personalInfo.gender || '',
+            dob: data.personalInfo.dob ? data.personalInfo.dob.split('T')[0] : '',
+            nationality: data.personalInfo.nationality || '',
+            phoneNumber: data.personalInfo.phoneNumber || '',
+            email: data.personalInfo.email || prev.email,
+            address: data.personalInfo.address || '',
+            city: data.personalInfo.city || '',
+            country: data.personalInfo.country || '',
+            // Section 2
+            highestLevel: data.educationalBackground?.highestLevel || '',
+            fieldOfStudy: data.educationalBackground?.fieldOfStudy || '',
+            institution: data.educationalBackground?.institution || '',
+            graduationYear: data.educationalBackground?.graduationYear || '',
+            certifications: data.educationalBackground?.certifications || '',
+            // Section 3
+            employmentStatus: data.professionalInfo?.employmentStatus || '',
+            jobTitle: data.professionalInfo?.jobTitle || '',
+            organization: data.professionalInfo?.organization || '',
+            yearsOfExperience: data.professionalInfo?.yearsOfExperience || '',
+            industry: data.professionalInfo?.industry || '',
+            // Section 5
+            hasComputer: data.technicalInfo?.hasComputer || false,
+            hasInternet: data.technicalInfo?.hasInternet || false,
+            deviceType: data.technicalInfo?.deviceType || 'Laptop',
+            digitalSkillLevel: data.technicalInfo?.digitalSkillLevel || 'Beginner',
+            // Section 7 (Documents)
+            idCard: data.documents?.idCard || '',
+            academicCertificates: data.documents?.academicCertificates || '',
+            resume: data.documents?.resume || '',
+            passportPhoto: data.documents?.passportPhoto || '',
+          }));
+        }
+      } catch (err) {
+        console.error('Error pre-filling form:', err);
+      }
+    };
+
+    if (student?.token) {
+      fetchLatestApp();
+    }
+  }, [student?.token]);
+
   if (!course || !student) {
     return (
       <div style={{ padding: '5rem', textAlign: 'center' }}>
@@ -103,13 +163,14 @@ const CourseApplicationForm = () => {
         },
       };
 
-      const { data } = await axios.post('http://localhost:5000/api/upload', uploadData, config);
-      setFormData((prev) => ({ ...prev, [fieldName]: `http://localhost:5000${data}` }));
+      const { data } = await axios.post(`${API_URL}/upload`, uploadData, config);
+      setFormData((prev) => ({ ...prev, [fieldName]: data }));
       setUploading('');
       setError('');
     } catch (err) {
       console.error(err);
-      setError('File upload failed. Ensure it is a valid PDF or Image under 5MB.');
+      const msg = err.response?.data?.message || err.message || 'File upload failed.';
+      setError(`Upload failed: ${msg}`);
       setUploading('');
     }
   };
@@ -159,7 +220,7 @@ const CourseApplicationForm = () => {
         },
       };
 
-      await axios.post('http://localhost:5000/api/applications', applicationPayload, config);
+      await axios.post(`${API_URL}/applications`, applicationPayload, config);
       setSubmitting(false);
       navigate('/my-applications', { state: { message: 'Application submitted successfully! Awaiting Admin Approval.' } });
     } catch (err) {
@@ -205,11 +266,17 @@ const CourseApplicationForm = () => {
         <hr style={{ opacity: 0.1, margin: '1rem 0' }} />
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
           <div className="form-group">
-            <label>Full Name <span style={{ color: '#dc2626' }}>*</span></label>
+            <label>
+              Full Name
+              <span style={{ color: '#dc2626' }}>*</span>
+            </label>
             <input type="text" className="form-control" name="fullName" value={formData.fullName} onChange={handleChange} required />
           </div>
           <div className="form-group">
-            <label>Gender <span style={{ color: '#dc2626' }}>*</span></label>
+            <label>
+              Gender
+              <span style={{ color: '#dc2626' }}>*</span>
+            </label>
             <select className="form-control" name="gender" value={formData.gender} onChange={handleChange} required>
               <option value="">Select</option>
               <option value="Male">Male</option>
@@ -217,31 +284,52 @@ const CourseApplicationForm = () => {
             </select>
           </div>
           <div className="form-group">
-            <label>Date of Birth <span style={{ color: '#dc2626' }}>*</span></label>
+            <label>
+              Date of Birth
+              <span style={{ color: '#dc2626' }}>*</span>
+            </label>
             <input type="date" className="form-control" name="dob" value={formData.dob} onChange={handleChange} required />
           </div>
           <div className="form-group">
-            <label>Nationality <span style={{ color: '#dc2626' }}>*</span></label>
+            <label>
+              Nationality
+              <span style={{ color: '#dc2626' }}>*</span>
+            </label>
             <input type="text" className="form-control" name="nationality" value={formData.nationality} onChange={handleChange} required />
           </div>
           <div className="form-group">
-            <label>Phone Number <span style={{ color: '#dc2626' }}>*</span></label>
+            <label>
+              Phone Number
+              <span style={{ color: '#dc2626' }}>*</span>
+            </label>
             <input type="text" className="form-control" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} placeholder="e.g. +232 00 000000" required />
           </div>
           <div className="form-group">
-            <label>Email Address <span style={{ color: '#dc2626' }}>*</span></label>
+            <label>
+              Email Address
+              <span style={{ color: '#dc2626' }}>*</span>
+            </label>
             <input type="email" className="form-control" name="email" value={formData.email} onChange={handleChange} required />
           </div>
           <div className="form-group" style={{ gridColumn: '1 / -1' }}>
-            <label>Residential Address <span style={{ color: '#dc2626' }}>*</span></label>
+            <label>
+              Residential Address
+              <span style={{ color: '#dc2626' }}>*</span>
+            </label>
             <input type="text" className="form-control" name="address" value={formData.address} onChange={handleChange} placeholder="House Number, Street Name" required />
           </div>
           <div className="form-group">
-            <label>City <span style={{ color: '#dc2626' }}>*</span></label>
+            <label>
+              City
+              <span style={{ color: '#dc2626' }}>*</span>
+            </label>
             <input type="text" className="form-control" name="city" value={formData.city} onChange={handleChange} required />
           </div>
           <div className="form-group">
-            <label>Country <span style={{ color: '#dc2626' }}>*</span></label>
+            <label>
+              Country
+              <span style={{ color: '#dc2626' }}>*</span>
+            </label>
             <input type="text" className="form-control" name="country" value={formData.country} onChange={handleChange} required />
           </div>
         </div>
@@ -251,19 +339,31 @@ const CourseApplicationForm = () => {
         <hr style={{ opacity: 0.1, margin: '1rem 0' }} />
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
           <div className="form-group">
-            <label>Highest Level of Education <span style={{ color: '#dc2626' }}>*</span></label>
+            <label>
+              Highest Level of Education
+              <span style={{ color: '#dc2626' }}>*</span>
+            </label>
             <input type="text" className="form-control" name="highestLevel" value={formData.highestLevel} onChange={handleChange} placeholder="e.g. High School, Diploma, Bachelor’s" required />
           </div>
           <div className="form-group">
-            <label>Field of Study <span style={{ color: '#dc2626' }}>*</span></label>
+            <label>
+              Field of Study
+              <span style={{ color: '#dc2626' }}>*</span>
+            </label>
             <input type="text" className="form-control" name="fieldOfStudy" value={formData.fieldOfStudy} onChange={handleChange} placeholder="e.g. Computer Science" required />
           </div>
           <div className="form-group">
-            <label>Institution Name <span style={{ color: '#dc2626' }}>*</span></label>
+            <label>
+              Institution Name
+              <span style={{ color: '#dc2626' }}>*</span>
+            </label>
             <input type="text" className="form-control" name="institution" value={formData.institution} onChange={handleChange} required />
           </div>
           <div className="form-group">
-            <label>Year of Graduation <span style={{ color: '#dc2626' }}>*</span></label>
+            <label>
+              Year of Graduation
+              <span style={{ color: '#dc2626' }}>*</span>
+            </label>
             <input type="text" className="form-control" name="graduationYear" value={formData.graduationYear} onChange={handleChange} required />
           </div>
           <div className="form-group" style={{ gridColumn: '1 / -1' }}>
@@ -313,11 +413,17 @@ const CourseApplicationForm = () => {
             <input type="text" className="form-control" value={formData.courseApplyingFor} readOnly style={{ background: '#f1f5f9' }} />
           </div>
           <div className="form-group">
-            <label>Course Category <span style={{ color: '#dc2626' }}>*</span></label>
+            <label>
+              Course Category
+              <span style={{ color: '#dc2626' }}>*</span>
+            </label>
             <input type="text" className="form-control" name="courseCategory" value={formData.courseCategory} onChange={handleChange} placeholder="e.g. ICT, Business, Health" required />
           </div>
           <div className="form-group">
-            <label>Preferred Learning Mode <span style={{ color: '#dc2626' }}>*</span></label>
+            <label>
+              Preferred Learning Mode
+              <span style={{ color: '#dc2626' }}>*</span>
+            </label>
             <select className="form-control" name="preferredMode" value={formData.preferredMode} onChange={handleChange} required>
               <option value="Online Live">Online Live</option>
               <option value="Self-paced">Self-paced</option>
@@ -405,7 +511,7 @@ const CourseApplicationForm = () => {
                   Max 5MB (PDF or Image)
                 </span>
               </label>
-              <div style={{ display: 'flex', gap: '0.5rem', marginTop: '5px' }}>
+              <div style={{ display: 'flex', gap: '0.5rem', marginTop: '5px', alignItems: 'center' }}>
                 <input type="file" id={`upload-${doc}`} style={{ display: 'none' }} accept=".pdf,.doc,.docx,image/*" onChange={(e) => uploadFileHandler(e, doc)} />
                 <button type="button" className="btn-secondary btn-sm" onClick={() => document.getElementById(`upload-${doc}`).click()}>
                   {uploading === doc ? <FaSpinner className="fa-spin" /> : (
@@ -417,12 +523,17 @@ const CourseApplicationForm = () => {
                   )}
                 </button>
                 {formData[doc] && (
-                  <span style={{
-                    color: '#10b981', fontSize: '0.8rem', display: 'flex', alignItems: 'center', fontWeight: 'bold',
-                  }}
-                  >
-                    ✓ Uploaded
-                  </span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginLeft: 'auto' }}>
+                    <span style={{ color: '#10b981', fontSize: '0.8rem', fontWeight: 'bold' }}>✓ Uploaded</span>
+                    <a
+                      href={getImgUrl(formData[doc])}
+                      target="_blank"
+                      rel="noreferrer"
+                      style={{ fontSize: '0.75rem', color: '#3b82f6', textDecoration: 'none' }}
+                    >
+                      View
+                    </a>
+                  </div>
                 )}
               </div>
             </div>
